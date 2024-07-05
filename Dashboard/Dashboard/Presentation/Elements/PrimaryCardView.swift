@@ -11,6 +11,7 @@ import Theme
 import Core
 
 public struct PrimaryCardView: View {
+    @Environment(\.isHorizontal) private var isHorizontal
     
     private let courseName: String
     private let org: String
@@ -61,11 +62,39 @@ public struct PrimaryCardView: View {
     
     public var body: some View {
         ZStack {
+            if isHorizontal {
+                horizontalLayout
+            } else {
+                verticalLayout
+            }
+        }
+        .background(Theme.Colors.background)
+        .cornerRadius(8)
+        .shadow(color: Theme.Colors.courseCardShadow, radius: 4, x: 0, y: 3)
+        .padding(20)
+    }
+    
+    @ViewBuilder
+    private var horizontalLayout: some View {
+        HStack(spacing: 0) {
+            GeometryReader { proxy in
+                // Image and progress
+                VStack(alignment: .leading, spacing: 0) {
+                    courseBanner
+                        .frame(width: proxy.size.width)
+                    ProgressLineView(progressEarned: progressEarned, progressPossible: progressPossible)
+                }
+                .clipped()
+                .onTapGesture {
+                    openCourseAction()
+                }
+            }
+            // Texts
             VStack(alignment: .leading, spacing: 0) {
                 Group {
-                    courseBanner
-                    ProgressLineView(progressEarned: progressEarned, progressPossible: progressPossible)
+                    Spacer()
                     courseTitle
+                    Spacer()
                 }
                 .onTapGesture {
                     openCourseAction()
@@ -73,10 +102,25 @@ public struct PrimaryCardView: View {
                 assignments
             }
         }
-        .background(Theme.Colors.background)
-        .cornerRadius(8)
-        .shadow(color: Theme.Colors.courseCardShadow, radius: 4, x: 0, y: 3)
-        .padding(20)
+        .frame(minHeight: 240)
+        
+    }
+    
+    @ViewBuilder
+    private var verticalLayout: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Group {
+                courseBanner
+                    .frame(height: 140)
+                    .clipped()
+                ProgressLineView(progressEarned: progressEarned, progressPossible: progressPossible)
+                courseTitle
+            }
+            .onTapGesture {
+                openCourseAction()
+            }
+            assignments
+        }
     }
     
     private var assignments: some View {
@@ -215,12 +259,10 @@ public struct PrimaryCardView: View {
     }
     
     private var courseBanner: some View {
-        return KFImage(URL(string: courseImage))
+        KFImage(URL(string: courseImage))
             .onFailureImage(CoreAssets.noCourseImage.image)
             .resizable()
             .aspectRatio(contentMode: .fill)
-            .frame(height: 140)
-            .clipped()
             .accessibilityElement(children: .ignore)
             .accessibilityIdentifier("course_image")
     }
