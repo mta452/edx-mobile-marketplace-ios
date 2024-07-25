@@ -48,9 +48,10 @@ public struct AppReviewView: View {
                     }
                     Text(viewModel.state.title)
                         .font(Theme.Fonts.titleMedium)
+                        .foregroundColor(Theme.Colors.textPrimary)
                     Text(viewModel.state.description)
                         .font(Theme.Fonts.titleSmall)
-                        .foregroundColor(Theme.Colors.avatarStroke)
+                        .foregroundColor(Theme.Colors.textSecondary)
                         .multilineTextAlignment(.center)
                     switch viewModel.state {
                     case .vote:
