@@ -66,6 +66,7 @@
         <attribute name="courseEnd" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="courseID" optional="YES" attributeType="String"/>
         <attribute name="courseStart" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="futureAssignments" optional="YES" attributeType="Binary"/>
         <attribute name="hasAccess" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isSelfPaced" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isUpgradeable" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -73,14 +74,13 @@
         <attribute name="lmsPrice" optional="YES" attributeType="Double" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="org" optional="YES" attributeType="String"/>
+        <attribute name="pastAssignments" optional="YES" attributeType="Binary"/>
         <attribute name="progressEarned" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="progressPossible" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="resumeTitle" optional="YES" attributeType="String"/>
         <attribute name="sku" optional="YES" attributeType="String"/>
         <attribute name="startDisplay" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="startType" optional="YES" attributeType="String"/>
-        <relationship name="futureAssignments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDAssignment"/>
-        <relationship name="pastAssignments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDAssignment"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="courseID"/>

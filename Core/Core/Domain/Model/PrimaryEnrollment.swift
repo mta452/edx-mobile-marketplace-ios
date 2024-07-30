@@ -98,7 +98,7 @@ public struct PrimaryCourse: Hashable {
     }
 }
 
-public struct Assignment: Hashable {
+public struct Assignment: Hashable, Codable {
     public let type: String
     public let title: String
     public let description: String?

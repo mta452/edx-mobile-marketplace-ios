@@ -120,30 +120,19 @@ public class DashboardPersistence: DashboardPersistenceProtocol {
         let request = CDMyEnrollments.fetchRequest()
         if let result = try context.fetch(request).first {
             let primaryCourse = result.primaryCourse.flatMap { cdPrimaryCourse -> PrimaryCourse? in
+                let decoder = JSONDecoder()
                 
-                let futureAssignments = (cdPrimaryCourse.futureAssignments as? Set<CDAssignment> ?? [])
-                    .map { future in
-                        return Assignment(
-                            type: future.type ?? "",
-                            title: future.title ?? "",
-                            description: future.descript ?? "",
-                            date: future.date ?? Date(),
-                            complete: future.complete,
-                            firstComponentBlockId: future.firstComponentBlockId
-                        )
-                    }
+                var futureAssignments: [Assignment] = []
+                if let data = cdPrimaryCourse.futureAssignments, 
+                    let assignments = try? decoder.decode([Assignment].self, from: data) {
+                    futureAssignments = assignments
+                }
                 
-                let pastAssignments = (cdPrimaryCourse.pastAssignments as? Set<CDAssignment> ?? [])
-                    .map { past in
-                        return Assignment(
-                            type: past.type ?? "",
-                            title: past.title ?? "",
-                            description: past.descript ?? "",
-                            date: past.date ?? Date(),
-                            complete: past.complete,
-                            firstComponentBlockId: past.firstComponentBlockId
-                        )
-                    }
+                var pastAssignments: [Assignment] = []
+                if let data = cdPrimaryCourse.pastAssignments,
+                    let assignments = try? decoder.decode([Assignment].self, from: data) {
+                    pastAssignments = assignments
+                }
                 
                 return PrimaryCourse(
                     name: cdPrimaryCourse.name ?? "",
@@ -233,29 +222,18 @@ public class DashboardPersistence: DashboardPersistenceProtocol {
             if let result = try context.fetch(request).first {
                 let primaryCourse = result.primaryCourse.flatMap { cdPrimaryCourse -> PrimaryCourse? in
                     
-                    let futureAssignments = (cdPrimaryCourse.futureAssignments as? Set<CDAssignment> ?? [])
-                        .map { future in
-                            return Assignment(
-                                type: future.type ?? "",
-                                title: future.title ?? "",
-                                description: future.descript ?? "",
-                                date: future.date ?? Date(),
-                                complete: future.complete,
-                                firstComponentBlockId: future.firstComponentBlockId
-                            )
-                        }
+                    let decoder = JSONDecoder()
+                    var futureAssignments: [Assignment] = []
+                    if let data = cdPrimaryCourse.futureAssignments,
+                        let assignments = try? decoder.decode([Assignment].self, from: data) {
+                        futureAssignments = assignments
+                    }
                     
-                    let pastAssignments = (cdPrimaryCourse.pastAssignments as? Set<CDAssignment> ?? [])
-                        .map { past in
-                            return Assignment(
-                                type: past.type ?? "",
-                                title: past.title ?? "",
-                                description: past.descript ?? "",
-                                date: past.date ?? Date(),
-                                complete: past.complete,
-                                firstComponentBlockId: past.firstComponentBlockId
-                            )
-                        }
+                    var pastAssignments: [Assignment] = []
+                    if let data = cdPrimaryCourse.pastAssignments,
+                        let assignments = try? decoder.decode([Assignment].self, from: data) {
+                        pastAssignments = assignments
+                    }
                     
                     return PrimaryCourse(
                         name: cdPrimaryCourse.name ?? "",
@@ -374,29 +352,9 @@ public class DashboardPersistence: DashboardPersistenceProtocol {
             if let primaryCourse = enrollments.primaryCourse {
                 let cdPrimaryCourse = CDPrimaryCourse(context: self.context)
                 
-                let futureAssignments = primaryCourse.futureAssignments.map { assignment in
-                    let cdAssignment = CDAssignment(context: self.context)
-                    cdAssignment.type = assignment.type
-                    cdAssignment.title = assignment.title
-                    cdAssignment.descript = assignment.description
-                    cdAssignment.date = assignment.date
-                    cdAssignment.complete = assignment.complete
-                    cdAssignment.firstComponentBlockId = assignment.firstComponentBlockId
-                    return cdAssignment
-                }
-                cdPrimaryCourse.futureAssignments = NSSet(array: futureAssignments)
-                
-                let pastAssignments = primaryCourse.pastAssignments.map { assignment in
-                    let cdAssignment = CDAssignment(context: self.context)
-                    cdAssignment.type = assignment.type
-                    cdAssignment.title = assignment.title
-                    cdAssignment.descript = assignment.description
-                    cdAssignment.date = assignment.date
-                    cdAssignment.complete = assignment.complete
-                    cdAssignment.firstComponentBlockId = assignment.firstComponentBlockId
-                    return cdAssignment
-                }
-                cdPrimaryCourse.pastAssignments = NSSet(array: pastAssignments)
+                let encoder = JSONEncoder()
+                cdPrimaryCourse.futureAssignments = try? encoder.encode(primaryCourse.futureAssignments)
+                cdPrimaryCourse.pastAssignments = try? encoder.encode(primaryCourse.pastAssignments)
                 var lmsPrice: NSNumber?
                 if let price = primaryCourse.lmsPrice {
                     lmsPrice = NSNumber(value: price)
