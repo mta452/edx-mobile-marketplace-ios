@@ -218,9 +218,13 @@ public class CourseContainerViewModel: BaseCourseViewModel {
     
     @MainActor
     func updateMenuBarVisibility() {
-        shouldHideMenuBar =
-            courseStructure == nil ||
-            courseStructure?.coursewareAccessDetails?.coursewareAccess?.hasAccess == false
+        if #available(iOS 16.0, *) {
+            shouldHideMenuBar =
+                courseStructure == nil ||
+                courseStructure?.coursewareAccessDetails?.coursewareAccess?.hasAccess == false
+        } else {
+            shouldHideMenuBar = true
+        }
     }
     
     @MainActor
