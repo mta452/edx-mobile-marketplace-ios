@@ -112,6 +112,9 @@ public struct HandoutsUpdatesDetailView: View {
             guard UIApplication.shared.applicationState == .active else { return }
             updateColorScheme()
         }
+        .introspect(.viewController, on: .iOS(.v15), customize: { controller in
+            controller.navigationController?.setNavigationBarHidden(false, animated: false)
+        })
     }
     
     private var webViewHtml: some View {
