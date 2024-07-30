@@ -149,7 +149,7 @@ public struct DiscussionSearchTopicsView: View {
             .background(Theme.Colors.background.ignoresSafeArea())
             .avoidKeyboard(dismissKeyboardByTap: true)
             .navigationBarBackButtonHidden(true)
-            .navigationBarHidden(true)
+            .hideNavigationBar(true)
             .navigationTitle(DiscussionLocalization.search)
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now()) {
@@ -157,9 +157,6 @@ public struct DiscussionSearchTopicsView: View {
                         animated = true
                     }
                 }
-            }
-            .introspect(.viewController, on: .iOS(.v15)) { controller in
-                controller.navigationController?.setNavigationBarHidden(true, animated: false)
             }
         }
     }

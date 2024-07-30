@@ -161,7 +161,7 @@ public struct SearchView: View {
                 }
             }
             .navigationBarBackButtonHidden(true)
-            .navigationBarHidden(true)
+            .hideNavigationBar(true)
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now()) {
                     withAnimation(.easeIn(duration: 0.3)) {

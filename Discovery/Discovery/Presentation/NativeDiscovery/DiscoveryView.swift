@@ -179,7 +179,7 @@ public struct DiscoveryView: View {
                     }
                 }
             }
-            .navigationBarHidden(sourceScreen != .startup)
+            .hideNavigationBar(sourceScreen != .startup)
             .onFirstAppear {
                 if !(searchQuery.isEmpty) {
                     router.showDiscoverySearch(searchQuery: searchQuery)

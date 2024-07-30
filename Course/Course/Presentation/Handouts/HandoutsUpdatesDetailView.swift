@@ -105,16 +105,13 @@ public struct HandoutsUpdatesDetailView: View {
                 }
             }
         }
-        .navigationBarHidden(false)
+        .hideNavigationBar(false)
         .navigationBarBackButtonHidden(false)
         .navigationTitle(title)
         .onChange(of: colorSchemeNative) { _ in
             guard UIApplication.shared.applicationState == .active else { return }
             updateColorScheme()
         }
-        .introspect(.viewController, on: .iOS(.v15), customize: { controller in
-            controller.navigationController?.setNavigationBarHidden(false, animated: false)
-        })
     }
     
     private var webViewHtml: some View {

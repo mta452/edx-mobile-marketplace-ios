@@ -236,7 +236,7 @@ public struct PostsView: View {
                     )
                 }
             }
-            .navigationBarHidden(!showTopMenu)
+            .hideNavigationBar(!showTopMenu)
             .navigationBarBackButtonHidden(!showTopMenu)
             .navigationTitle(title)
             .background(

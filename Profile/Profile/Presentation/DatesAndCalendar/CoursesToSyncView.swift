@@ -71,7 +71,7 @@ public struct CoursesToSyncView: View {
                     .roundedBackground(Theme.Colors.background)
                     .ignoresSafeArea(.all, edges: .bottom)
                 }
-                .navigationBarHidden(true)
+                .hideNavigationBar(true)
                 .navigationBarBackButtonHidden(true)
                 
                 if viewModel.showError {

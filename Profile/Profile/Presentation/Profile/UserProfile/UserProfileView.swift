@@ -85,7 +85,7 @@ public struct UserProfileView: View {
                     .frameLimit(width: proxy.size.width)
                 }
                 .padding(.top, 8)
-                .navigationBarHidden(false)
+                .hideNavigationBar(false)
                 .navigationBarBackButtonHidden(false)
                 
                 // MARK: - Error Alert

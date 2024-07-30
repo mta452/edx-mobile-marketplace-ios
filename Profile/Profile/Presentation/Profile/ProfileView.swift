@@ -33,7 +33,7 @@ public struct ProfileView: View {
                 )
                 .accessibilityAction {}
                 .padding(.top, 8)
-                .navigationBarHidden(false)
+                .hideNavigationBar(false)
                 .navigationBarBackButtonHidden(false)
                 .navigationTitle(ProfileLocalization.title)
                 

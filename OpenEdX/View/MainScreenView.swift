@@ -144,7 +144,7 @@ struct MainScreenView: View {
             .tag(MainTab.profile)
             .accessibilityIdentifier("profile_tabitem")
         }
-        .navigationBarHidden(viewModel.selection == .dashboard)
+        .hideNavigationBar(viewModel.selection == .dashboard)
         .navigationBarBackButtonHidden(viewModel.selection == .dashboard)
         .navigationTitle(titleBar())
         .toolbar {
@@ -194,11 +194,6 @@ struct MainScreenView: View {
             }
         }
         .accentColor(Theme.Colors.accentXColor)
-        .introspect(.viewController, on: .iOS(.v15)) { controller in
-            if viewModel.selection == .dashboard {
-                controller.navigationController?.setNavigationBarHidden(true, animated: false)
-            }
-        }
     }
     
     @ViewBuilder
