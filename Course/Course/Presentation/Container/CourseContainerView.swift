@@ -237,6 +237,7 @@ public struct CourseContainerView: View {
                                 viewHeight: $viewHeight,
                                 dateTabIndex: CourseTab.dates.rawValue
                             )
+                            .padding(.bottom, 1)
                             .tabItem {
                                 tab.image
                                 Text(tab.title)
@@ -255,6 +256,7 @@ public struct CourseContainerView: View {
                                 viewHeight: $viewHeight,
                                 dateTabIndex: CourseTab.dates.rawValue
                             )
+                            .padding(.bottom, 1)
                             .tabItem {
                                 tab.image
                                 Text(tab.title)
@@ -271,6 +273,7 @@ public struct CourseContainerView: View {
                                 shouldShowUpgradeButton: $viewModel.shouldShowUpgradeButton,
                                 shouldHideMenuBar: $viewModel.shouldHideMenuBar
                             )
+                            .padding(.bottom, 1)
                             .tabItem {
                                 tab.image
                                 Text(tab.title)
@@ -289,6 +292,7 @@ public struct CourseContainerView: View {
                                 shouldShowUpgradeButton: $viewModel.shouldShowUpgradeButton,
                                 shouldHideMenuBar: $viewModel.shouldHideMenuBar
                             )
+                            .padding(.bottom, 1)
                             .tabItem {
                                 tab.image
                                 Text(tab.title)
@@ -305,6 +309,7 @@ public struct CourseContainerView: View {
                                 shouldShowUpgradeButton: $viewModel.shouldShowUpgradeButton,
                                 shouldHideMenuBar: $viewModel.shouldHideMenuBar
                             )
+                            .padding(.bottom, 1)
                             .tabItem {
                                 tab.image
                                 Text(tab.title)
