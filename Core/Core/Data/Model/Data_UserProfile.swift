@@ -135,6 +135,8 @@ public extension DataLayer.UserProfile {
             spokenLanguage: languageProficiencies?[safe: 0]?.code ?? "",
             shortBiography: bio ?? "",
             isFullProfile: accountPrivacy?.boolValue ?? true,
-            email: email ?? "")
+            email: email ?? "",
+            requiresParentalConsent: requiresParentalConsent ?? false
+        )
     }
 }
