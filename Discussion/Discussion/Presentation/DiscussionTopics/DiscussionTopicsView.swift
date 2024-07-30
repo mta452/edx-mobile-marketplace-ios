@@ -205,7 +205,6 @@ public struct DiscussionTopicsView: View {
                     await viewModel.getTopics(courseID: courseID)
                 }
             }
-            .hideNavigationBar(false)
             .navigationBarBackButtonHidden(false)
             .navigationTitle(viewModel.title)
             .background(
