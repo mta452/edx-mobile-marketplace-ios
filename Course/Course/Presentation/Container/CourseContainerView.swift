@@ -323,6 +323,7 @@ public struct CourseContainerView: View {
         .introspect(.viewController, on: .iOS(.v15), customize: { controller in
             controller.navigationController?.setNavigationBarHidden(true, animated: false)
         })
+        .accentColor(Theme.Colors.accentXColor)
         .onFirstAppear {
             Task {
                 await viewModel.tryToRefreshCookies()
