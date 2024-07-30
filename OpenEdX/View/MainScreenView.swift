@@ -19,6 +19,7 @@ struct MainScreenView: View {
     
     @State private var disableAllTabs: Bool = false
     @State private var updateAvailable: Bool = false
+    @State private var isVisible: Bool = false
     
     @ObservedObject private(set) var viewModel: MainScreenViewModel
     
@@ -185,6 +186,12 @@ struct MainScreenView: View {
                 viewModel.trackMainProfileTabClicked()
             }
         })
+        .onAppear {
+            isVisible = true
+        }
+        .onDisappear {
+            isVisible = false
+        }
         .onFirstAppear {
             Task {
                 await viewModel.prefetchDataForOffline()
@@ -195,7 +202,9 @@ struct MainScreenView: View {
         }
         .accentColor(Theme.Colors.accentXColor)
         .introspect(.viewController, on: .iOS(.v15)) { controller in
-            controller.navigationController?.setNavigationBarHidden(true, animated: false)
+            if isVisible && viewModel.selection != .profile {
+                controller.navigationController?.setNavigationBarHidden(true, animated: false)
+            }
         }
     }
     
