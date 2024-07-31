@@ -235,7 +235,7 @@ public struct EditProfileView: View {
                         .accessibilityIdentifier("progress_bar")
                 }
             }
-            .navigationBarHidden(false)
+            .hideNavigationBar(false)
             .navigationBarBackButtonHidden(true)
             .navigationTitle(ProfileLocalization.editProfile)
             .toolbar {

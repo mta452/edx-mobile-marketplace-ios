@@ -50,6 +50,7 @@ public struct CourseDatesView: View {
                             .padding(.top, 200)
                             .padding(.horizontal)
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else if let courseDates = viewModel.courseDates, !courseDates.courseDateBlocks.isEmpty {
                     CourseDateListView(
                         viewModel: viewModel,

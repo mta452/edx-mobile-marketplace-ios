@@ -179,16 +179,18 @@ public extension View {
         }
     }
     
-    func hideNavigationBar() -> some View {
+    func hideNavigationBar(_ isHidden: Bool = true) -> some View {
         if #available(iOS 16.0, *) {
-            return self.navigationBarHidden(true)
+            return self.navigationBarHidden(isHidden)
         } else {
-            return self.introspect(
-                .navigationView(style: .stack),
-                on: .iOS(.v15...),
-                scope: .ancestor) {
-                    $0.isNavigationBarHidden = true
-                }
+            return self
+                .navigationBarHidden(isHidden)
+                .introspect(
+                    .navigationView(style: .stack),
+                    on: .iOS(.v15...),
+                    scope: .ancestor) {
+                        $0.isNavigationBarHidden = isHidden
+                    }
         }
     }
 

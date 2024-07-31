@@ -115,7 +115,7 @@ public struct VideoSettingsView: View {
                 }
             }
         }
-        .navigationBarHidden(true)
+        .hideNavigationBar(true)
         .navigationBarBackButtonHidden(true)
         .navigationTitle(ProfileLocalization.Settings.videoSettingsTitle)
         .ignoresSafeArea(.all, edges: .horizontal)

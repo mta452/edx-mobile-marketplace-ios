@@ -78,7 +78,7 @@ public struct CourseContainerView: View {
         ZStack(alignment: .top) {
             content
         }
-        .navigationBarHidden(true)
+        .hideNavigationBar(true)
         .navigationBarBackButtonHidden(true)
         .navigationTitle(title)
         .onChange(of: viewModel.selection, perform: didSelect)
@@ -237,6 +237,7 @@ public struct CourseContainerView: View {
                                 viewHeight: $viewHeight,
                                 dateTabIndex: CourseTab.dates.rawValue
                             )
+                            .padding(.bottom, 1)
                             .tabItem {
                                 tab.image
                                 Text(tab.title)
@@ -255,6 +256,7 @@ public struct CourseContainerView: View {
                                 viewHeight: $viewHeight,
                                 dateTabIndex: CourseTab.dates.rawValue
                             )
+                            .padding(.bottom, 1)
                             .tabItem {
                                 tab.image
                                 Text(tab.title)
@@ -271,6 +273,7 @@ public struct CourseContainerView: View {
                                 shouldShowUpgradeButton: $viewModel.shouldShowUpgradeButton,
                                 shouldHideMenuBar: $viewModel.shouldHideMenuBar
                             )
+                            .padding(.bottom, 1)
                             .tabItem {
                                 tab.image
                                 Text(tab.title)
@@ -289,6 +292,7 @@ public struct CourseContainerView: View {
                                 shouldShowUpgradeButton: $viewModel.shouldShowUpgradeButton,
                                 shouldHideMenuBar: $viewModel.shouldHideMenuBar
                             )
+                            .padding(.bottom, 1)
                             .tabItem {
                                 tab.image
                                 Text(tab.title)
@@ -305,6 +309,7 @@ public struct CourseContainerView: View {
                                 shouldShowUpgradeButton: $viewModel.shouldShowUpgradeButton,
                                 shouldHideMenuBar: $viewModel.shouldHideMenuBar
                             )
+                            .padding(.bottom, 1)
                             .tabItem {
                                 tab.image
                                 Text(tab.title)
@@ -320,9 +325,7 @@ public struct CourseContainerView: View {
         .introspect(.scrollView, on: .iOS(.v16...), customize: { tabView in
             tabView.isScrollEnabled = false
         })
-        .introspect(.viewController, on: .iOS(.v15), customize: { controller in
-            controller.navigationController?.setNavigationBarHidden(true, animated: false)
-        })
+        .accentColor(Theme.Colors.accentXColor)
         .onFirstAppear {
             Task {
                 await viewModel.tryToRefreshCookies()

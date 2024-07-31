@@ -105,7 +105,7 @@ public struct HandoutsUpdatesDetailView: View {
                 }
             }
         }
-        .navigationBarHidden(false)
+        .hideNavigationBar(false)
         .navigationBarBackButtonHidden(false)
         .navigationTitle(title)
         .onChange(of: colorSchemeNative) { _ in

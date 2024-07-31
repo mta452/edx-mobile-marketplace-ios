@@ -52,7 +52,7 @@ public struct DatesAndCalendarView: View {
                     .roundedBackground(Theme.Colors.background)
                     .ignoresSafeArea(.all, edges: .bottom)
                 }
-                .navigationBarHidden(true)
+                .hideNavigationBar(true)
                 .navigationBarBackButtonHidden(true)
                 
                 // Error Alert if needed

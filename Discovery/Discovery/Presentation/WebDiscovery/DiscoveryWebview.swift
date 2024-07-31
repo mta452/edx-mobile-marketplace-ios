@@ -162,7 +162,7 @@ public struct DiscoveryWebview: View {
                 }
             }
         }
-        .navigationBarHidden(viewModel.sourceScreen == .default && discoveryType == .discovery)
+        .hideNavigationBar(viewModel.sourceScreen == .default && discoveryType == .discovery)
         .navigationTitle(CoreLocalization.Mainscreen.discovery)
         .background(Theme.Colors.background.ignoresSafeArea())
         .onFirstAppear {

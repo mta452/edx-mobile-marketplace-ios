@@ -142,7 +142,7 @@ public struct DeleteAccountView: View {
                        maxHeight: .infinity,
                        alignment: .top)
                 .padding(.top, 8)
-                .navigationBarHidden(false)
+                .hideNavigationBar(false)
                 .navigationBarBackButtonHidden(true)
                 .navigationTitle(ProfileLocalization.DeleteAccount.title)
                 .toolbar {

@@ -40,6 +40,6 @@ public struct NotAvailableOnMobileView: View {
             }
             .padding(24)
         }
-        .navigationBarHidden(false)
+        .hideNavigationBar(false)
     }
 }

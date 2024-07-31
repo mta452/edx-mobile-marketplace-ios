@@ -111,7 +111,7 @@ public struct VideoQualityView: View {
                 }
             }
         }
-        .navigationBarHidden(true)
+        .hideNavigationBar(true)
         .navigationBarBackButtonHidden(true)
         .navigationTitle(ProfileLocalization.Settings.videoQualityTitle)
         .ignoresSafeArea(.all, edges: .horizontal)

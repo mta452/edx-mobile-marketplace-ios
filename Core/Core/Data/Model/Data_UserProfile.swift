@@ -69,12 +69,13 @@ public extension DataLayer {
 // MARK: - AccountPrivacy
 public enum AccountPrivacy: String, Codable {
     case privateAccess = "private"
+    case privateAccessBig = "PRIVATE"
     case allUsers = "all_users"
     case allUsersBig = "ALL_USERS"
     
     public var boolValue: Bool {
         switch self {
-        case .privateAccess:
+        case .privateAccess, .privateAccessBig:
             return false
         case .allUsers, .allUsersBig:
             return true
