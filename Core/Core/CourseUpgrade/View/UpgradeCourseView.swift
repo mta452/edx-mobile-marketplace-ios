@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Swinject
+import Theme
 
 public enum CourseAccessErrorHelperType {
     case isEndDateOld(date: Date)
@@ -90,7 +91,7 @@ public struct UpgradeCourseView: View {
                             )
                             if !isHorizontal {
                                 VStack {
-                                    CoreAssets.upgradeArrowImage.swiftUIImage
+                                    CoreAssets.trophyCircular.swiftUIImage
                                         .resizable()
                                         .frame(width: 96, height: 96)
                                         .padding(.bottom, 4)
