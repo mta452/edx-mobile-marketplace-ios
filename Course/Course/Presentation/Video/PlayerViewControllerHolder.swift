@@ -7,6 +7,7 @@
 
 import AVKit
 import Combine
+import Core
 
 public protocol PlayerViewControllerHolderProtocol: AnyObject {
     var url: URL? { get }
@@ -23,11 +24,11 @@ public protocol PlayerViewControllerHolderProtocol: AnyObject {
         blockID: String,
         courseID: String,
         selectedCourseTab: Int,
-        videoResolution: CGSize,
         pipManager: PipManagerProtocol,
         playerTracker: any PlayerTrackerProtocol,
         playerDelegate: PlayerDelegateProtocol?,
-        playerService: PlayerServiceProtocol
+        playerService: PlayerServiceProtocol,
+        appStorage: CoreStorage?
     )
     func getTimePublisher() -> AnyPublisher<Double, Never>
     func getErrorPublisher() -> AnyPublisher<Error, Never>
@@ -69,10 +70,10 @@ public class PlayerViewControllerHolder: PlayerViewControllerHolderProtocol {
     private let playerTracker: any PlayerTrackerProtocol
     private let playerDelegate: PlayerDelegateProtocol?
     private let playerService: PlayerServiceProtocol
-    private let videoResolution: CGSize
     private let errorPublisher = PassthroughSubject<Error, Never>()
     private var isViewedOnce: Bool = false
     private var cancellations: [AnyCancellable] = []
+    private var appStorage: CoreStorage?
 
     let pipManager: PipManagerProtocol
 
@@ -83,7 +84,21 @@ public class PlayerViewControllerHolder: PlayerViewControllerHolderProtocol {
         playerController.canStartPictureInPictureAutomaticallyFromInline = true
         playerController.delegate = playerDelegate
         playerController.player = playerTracker.player as? AVPlayer
-        playerController.player?.currentItem?.preferredMaximumResolution = videoResolution
+        playerController.player?.currentItem?.preferredMaximumResolution = (
+            appStorage?.userSettings?.streamingQuality ?? .auto
+        ).resolution
+
+        if let speed = appStorage?.userSettings?.videoPlaybackSpeed {
+            if #available(iOS 16.0, *) {
+                if let playbackSpeed = playerController.speeds.first(where: { $0.rate == speed }) {
+                    playerController.selectSpeed(playbackSpeed)
+                }
+            } else {
+                // Fallback on earlier versions
+                playerController.player?.rate = speed
+            }
+        }
+
         return playerController
     }()
 
@@ -92,21 +107,21 @@ public class PlayerViewControllerHolder: PlayerViewControllerHolderProtocol {
         blockID: String,
         courseID: String,
         selectedCourseTab: Int,
-        videoResolution: CGSize,
         pipManager: PipManagerProtocol,
         playerTracker: any PlayerTrackerProtocol,
         playerDelegate: PlayerDelegateProtocol?,
-        playerService: PlayerServiceProtocol
+        playerService: PlayerServiceProtocol,
+        appStorage: CoreStorage?
     ) {
         self.url = url
         self.blockID = blockID
         self.courseID = courseID
         self.selectedCourseTab = selectedCourseTab
-        self.videoResolution = videoResolution
         self.pipManager = pipManager
         self.playerTracker = playerTracker
         self.playerDelegate = playerDelegate
         self.playerService = playerService
+        self.appStorage = appStorage
         addObservers()
     }
     
@@ -131,6 +146,7 @@ public class PlayerViewControllerHolder: PlayerViewControllerHolderProtocol {
             .sink {[weak self] rate in
                 guard rate > 0 else { return }
                 self?.pausePipIfNeed()
+                self?.saveSelectedRate(rate: rate)
             }
             .store(in: &cancellations)
         pipManager.pipRatePublisher()?
@@ -139,6 +155,13 @@ public class PlayerViewControllerHolder: PlayerViewControllerHolderProtocol {
                 self?.playerController?.pause()
             }
             .store(in: &cancellations)
+    }
+
+    private func saveSelectedRate(rate: Float) {
+        if var storage = appStorage, var userSettings = storage.userSettings, userSettings.videoPlaybackSpeed != rate {
+            userSettings.videoPlaybackSpeed = rate
+            storage.userSettings = userSettings
+        }
     }
 
     public func pausePipIfNeed() {
@@ -204,7 +227,6 @@ extension PlayerViewControllerHolder {
             blockID: "",
             courseID: "",
             selectedCourseTab: 0,
-            videoResolution: .zero,
             pipManager: PipManagerProtocolMock(),
             playerTracker: PlayerTrackerProtocolMock(url: URL(string: "")),
             playerDelegate: nil,
@@ -213,7 +235,8 @@ extension PlayerViewControllerHolder {
                 blockID: "",
                 interactor: CourseInteractor.mock,
                 router: CourseRouterMock()
-            )
+            ),
+            appStorage: CoreStorageMock()
         )
     }
 }

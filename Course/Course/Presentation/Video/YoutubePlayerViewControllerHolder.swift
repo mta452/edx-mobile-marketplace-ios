@@ -8,6 +8,7 @@
 import Combine
 import Foundation
 import YouTubePlayerKit
+import Core
 
 public class YoutubePlayerViewControllerHolder: PlayerViewControllerHolderProtocol {
     public let url: URL?
@@ -33,7 +34,6 @@ public class YoutubePlayerViewControllerHolder: PlayerViewControllerHolderProtoc
     }
     private let playerTracker: any PlayerTrackerProtocol
     private let playerService: PlayerServiceProtocol
-    private let videoResolution: CGSize
     private let errorPublisher = PassthroughSubject<Error, Never>()
     private var isViewedOnce: Bool = false
     private var cancellations: [AnyCancellable] = []
@@ -49,23 +49,23 @@ public class YoutubePlayerViewControllerHolder: PlayerViewControllerHolderProtoc
         blockID: String,
         courseID: String,
         selectedCourseTab: Int,
-        videoResolution: CGSize,
         pipManager: PipManagerProtocol,
         playerTracker: any PlayerTrackerProtocol,
         playerDelegate: PlayerDelegateProtocol?,
-        playerService: PlayerServiceProtocol
+        playerService: PlayerServiceProtocol,
+        appStorage: CoreStorage?
     ) {
         self.url = url
         self.blockID = blockID
         self.courseID = courseID
         self.selectedCourseTab = selectedCourseTab
-        self.videoResolution = videoResolution
         self.pipManager = pipManager
         self.playerTracker = playerTracker
         self.playerService = playerService
         let youtubePlayer = playerTracker.player as? YouTubePlayer
         var configuration = youtubePlayer?.configuration
         configuration?.autoPlay = !pipManager.isPipActive
+        configuration?.fullscreenMode = .web
         if let configuration = configuration {
             youtubePlayer?.update(configuration: configuration)
         }
@@ -171,7 +171,6 @@ extension YoutubePlayerViewControllerHolder {
             blockID: "",
             courseID: "",
             selectedCourseTab: 0,
-            videoResolution: .zero,
             pipManager: PipManagerProtocolMock(),
             playerTracker: PlayerTrackerProtocolMock(url: URL(string: "")),
             playerDelegate: nil,
@@ -180,7 +179,8 @@ extension YoutubePlayerViewControllerHolder {
                 blockID: "",
                 interactor: CourseInteractor.mock,
                 router: CourseRouterMock()
-            )
+            ),
+            appStorage: nil
         )
     }
 }
