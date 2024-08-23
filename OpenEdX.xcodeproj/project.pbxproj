@@ -773,7 +773,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.0.1;
+				MARKETING_VERSION = 6.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = org.openedx.app.stage;
 				PRODUCT_NAME = "$(TARGET_NAME) Stage";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -862,7 +862,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.0.1;
+				MARKETING_VERSION = 6.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = org.openedx.app.stage;
 				PRODUCT_NAME = "$(TARGET_NAME) Stage";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -957,7 +957,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.0.1;
+				MARKETING_VERSION = 6.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = org.openedx.app.dev;
 				PRODUCT_NAME = "$(TARGET_NAME) Dev";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1046,7 +1046,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.0.1;
+				MARKETING_VERSION = 6.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = org.openedx.app.dev;
 				PRODUCT_NAME = "$(TARGET_NAME) Dev";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1195,7 +1195,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.0.1;
+				MARKETING_VERSION = 6.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = org.openedx.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1230,7 +1230,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 6.0.1;
+				MARKETING_VERSION = 6.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = org.openedx.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
