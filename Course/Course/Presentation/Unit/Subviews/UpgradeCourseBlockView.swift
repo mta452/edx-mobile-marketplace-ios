@@ -21,14 +21,14 @@ struct UpgradeCourseBlockView: View {
                     .resizable()
                     .frame(width: 14, height: 20)
                 Text(CourseLocalization.Course.gradedAssignmentLocked)
-                    .font(Theme.Fonts.titleLarge)
+                    .font(Theme.Fonts.titleMedium)
                     .foregroundColor(Theme.Colors.textPrimary)
                     .accessibilityIdentifier("graded_assignment_locked_text")
             }
             Text(CourseLocalization.Course.upgradeToGainAccess)
                 .font(Theme.Fonts.bodyLarge)
                 .foregroundColor(Theme.Colors.textPrimary)
-                .accessibilityIdentifier("graded_assignment_locked_text")
+                .accessibilityIdentifier("upgrade_to_gain_access_text")
                 .padding(.top, 30)
             
             StyledButton(
