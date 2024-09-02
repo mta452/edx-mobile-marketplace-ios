@@ -241,6 +241,7 @@ public struct CourseVertical: Identifiable, Hashable {
     public let completion: Double
     public var childs: [CourseBlock]
     public var webUrl: String
+    public let containsGatedContent: Bool
     
     public var isDownloadable: Bool {
         return childs.first(where: { $0.isDownloadable }) != nil
@@ -254,7 +255,8 @@ public struct CourseVertical: Identifiable, Hashable {
         type: BlockType,
         completion: Double,
         childs: [CourseBlock],
-        webUrl: String
+        webUrl: String,
+        gatedContent: Bool = false
     ) {
         self.blockId = blockId
         self.id = id
@@ -264,6 +266,7 @@ public struct CourseVertical: Identifiable, Hashable {
         self.completion = completion
         self.childs = childs
         self.webUrl = webUrl
+        self.containsGatedContent = gatedContent
     }
 }
 

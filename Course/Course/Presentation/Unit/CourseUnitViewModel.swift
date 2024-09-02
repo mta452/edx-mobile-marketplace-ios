@@ -14,12 +14,15 @@ public enum LessonType: Equatable {
     case video(videoUrl: String, blockID: String)
     case unknown(String)
     case discussion(String, String, String)
+    case needUpgrade
     
     static func from(_ block: CourseBlock, streamingQuality: StreamingQuality) -> Self {
         let mandatoryInjections: [WebviewInjection] = [.colorInversionCss, .ajaxCallback, .readability, .accessibility]
         switch block.type {
         case .course, .chapter, .vertical, .sequential:
             return .unknown(block.studentUrl)
+        case .locked:
+            return .needUpgrade
         case .unknown:
             if let multiDevice = block.multiDevice, multiDevice {
                 return .web(url: block.studentUrl, injections: mandatoryInjections)
@@ -97,6 +100,7 @@ public class CourseUnitViewModel: ObservableObject {
     var verticals: [CourseVertical]
     var verticalIndex: Int
     var courseName: String
+    var courseStructure: CourseStructure
     
     @Published var index: Int = 0
     var previousLesson: String = ""
@@ -143,6 +147,7 @@ public class CourseUnitViewModel: ObservableObject {
         chapterIndex: Int,
         sequentialIndex: Int,
         verticalIndex: Int,
+        courseStructure: CourseStructure,
         interactor: CourseInteractorProtocol,
         config: ConfigProtocol,
         router: CourseRouter,
@@ -159,6 +164,7 @@ public class CourseUnitViewModel: ObservableObject {
         self.sequentialIndex = sequentialIndex
         self.verticalIndex = verticalIndex
         self.verticals = chapters[chapterIndex].childs[sequentialIndex].childs
+        self.courseStructure = courseStructure
         self.interactor = interactor
         self.config = config
         self.router = router
@@ -166,6 +172,25 @@ public class CourseUnitViewModel: ObservableObject {
         self.connectivity = connectivity
         self.manager = manager
         self.storage = storage
+        if self.verticals[verticalIndex].containsGatedContent && courseStructure.isUpgradeable {
+            // needs to add block with "Upgrade now" button
+            self.verticals[verticalIndex].childs.append(
+                CourseBlock(
+                    blockId: UUID().uuidString,
+                    id: UUID().uuidString,
+                    courseId: courseID,
+                    graded: false,
+                    due: nil,
+                    completion: 0.0,
+                    type: .locked,
+                    displayName: "",
+                    studentUrl: "",
+                    webUrl: "",
+                    encodedVideo: nil,
+                    multiDevice: nil
+                )
+            )
+        }
     }
     
     private func selectLesson() -> Int {
@@ -342,7 +367,8 @@ public class CourseUnitViewModel: ObservableObject {
                 chapters: chapters,
                 chapterIndex: data.chapterIndex,
                 sequentialIndex: data.sequentialIndex,
-                animated: animated
+                animated: animated,
+                courseStructure: courseStructure
             )
         }
     }
@@ -354,5 +380,21 @@ public class CourseUnitViewModel: ObservableObject {
     
     public var currentCourseId: String {
         courseID
+    }
+
+    func showPaymentsInfo() {
+        guard let sku = courseStructure.sku, let lmsPrice = courseStructure.lmsPrice else { return }
+
+        Task {@MainActor in
+            await router.showUpgradeInfo(
+                productName: courseStructure.displayName,
+                message: "",
+                sku: sku,
+                courseID: courseStructure.id,
+                screen: .courseDashboard,
+                pacing: courseStructure.isSelfPaced ? Pacing.selfPace.rawValue : Pacing.instructor.rawValue,
+                lmsPrice: lmsPrice
+            )
+        }
     }
 }

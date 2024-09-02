@@ -129,7 +129,8 @@ struct CourseNavigationView: View {
                             chapters: viewModel.chapters,
                             chapterIndex: data.chapterIndex,
                             sequentialIndex: data.sequentialIndex,
-                            animated: true
+                            animated: true,
+                            courseStructure: viewModel.courseStructure
                         )
                     }
                 )
@@ -148,6 +149,28 @@ struct CourseNavigationView: View {
 #if DEBUG
 struct CourseNavigationView_Previews: PreviewProvider {
     static var previews: some View {
+        let courseStructure = CourseStructure(
+            id: "123",
+            graded: true,
+            completion: 0,
+            viewYouTubeUrl: "",
+            encodedVideo: "",
+            displayName: "",
+            topicID: nil,
+            childs: [],
+            media: DataLayer.CourseMedia(image: DataLayer.Image(raw: "",
+                                                                small: "",
+                                                                large: "")),
+            certificate: nil,
+            org: "",
+            isSelfPaced: true,
+            isUpgradeable: false,
+            sku: nil,
+            coursewareAccessDetails: nil,
+            courseProgress: nil,
+            lmsPrice: .zero
+        )
+        
         let viewModel = CourseUnitViewModel(
             lessonID: "1",
             courseID: "1",
@@ -156,6 +179,7 @@ struct CourseNavigationView_Previews: PreviewProvider {
             chapterIndex: 1,
             sequentialIndex: 1,
             verticalIndex: 1,
+            courseStructure: courseStructure,
             interactor: CourseInteractor.mock,
             config: ConfigMock(),
             router: CourseRouterMock(),

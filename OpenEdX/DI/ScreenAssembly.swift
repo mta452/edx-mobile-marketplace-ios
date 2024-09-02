@@ -335,7 +335,7 @@ class ScreenAssembly: Assembly {
         
         container.register(
             CourseUnitViewModel.self
-        ) { r, blockId, courseId, courseName, chapters, chapterIndex, sequentialIndex, verticalIndex in
+        ) { r, blockId, courseId, courseName, chapters, chapterIndex, sequentialIndex, verticalIndex, courseStructure in
             CourseUnitViewModel(
                 lessonID: blockId,
                 courseID: courseId,
@@ -344,6 +344,7 @@ class ScreenAssembly: Assembly {
                 chapterIndex: chapterIndex,
                 sequentialIndex: sequentialIndex,
                 verticalIndex: verticalIndex,
+                courseStructure: courseStructure,
                 interactor: r.resolve(CourseInteractorProtocol.self)!,
                 config: r.resolve(ConfigProtocol.self)!,
                 router: r.resolve(CourseRouter.self)!,

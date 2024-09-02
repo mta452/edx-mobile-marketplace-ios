@@ -327,7 +327,8 @@ public class Router: AuthorizationRouter,
         title: String,
         chapters: [CourseChapter],
         chapterIndex: Int,
-        sequentialIndex: Int
+        sequentialIndex: Int,
+        courseStructure: CourseStructure
     ) {
         let controller = getVerticalController(
             courseID: courseID,
@@ -335,7 +336,8 @@ public class Router: AuthorizationRouter,
             title: title,
             chapters: chapters,
             chapterIndex: chapterIndex,
-            sequentialIndex: sequentialIndex
+            sequentialIndex: sequentialIndex,
+            courseStructure: courseStructure
         )
         navigationController.pushViewController(controller, animated: true)
     }
@@ -346,7 +348,8 @@ public class Router: AuthorizationRouter,
         title: String,
         chapters: [CourseChapter],
         chapterIndex: Int,
-        sequentialIndex: Int
+        sequentialIndex: Int,
+        courseStructure: CourseStructure
     ) -> UIHostingController<CourseVerticalView> {
         let viewModel = Container.shared.resolve(
             CourseVerticalViewModel.self,
@@ -359,7 +362,8 @@ public class Router: AuthorizationRouter,
             title: title,
             courseName: courseName,
             courseID: courseID,
-            viewModel: viewModel
+            viewModel: viewModel,
+            courseStructure: courseStructure
         )
         return UIHostingController(rootView: view)
     }
@@ -475,7 +479,8 @@ public class Router: AuthorizationRouter,
         verticalIndex: Int,
         chapters: [CourseChapter],
         chapterIndex: Int,
-        sequentialIndex: Int
+        sequentialIndex: Int,
+        courseStructure: CourseStructure
     ) {
         let controller = getUnitController(
             courseName: courseName,
@@ -484,7 +489,8 @@ public class Router: AuthorizationRouter,
             verticalIndex: verticalIndex,
             chapters: chapters,
             chapterIndex: chapterIndex,
-            sequentialIndex: sequentialIndex
+            sequentialIndex: sequentialIndex,
+            courseStructure: courseStructure
         )
         navigationController.pushViewController(controller, animated: true)
     }
@@ -496,7 +502,8 @@ public class Router: AuthorizationRouter,
         verticalIndex: Int,
         chapters: [CourseChapter],
         chapterIndex: Int,
-        sequentialIndex: Int
+        sequentialIndex: Int,
+        courseStructure: CourseStructure
     ) -> UIHostingController<CourseUnitView> {
         let viewModel = Container.shared.resolve(
             CourseUnitViewModel.self,
@@ -506,7 +513,8 @@ public class Router: AuthorizationRouter,
             chapters,
             chapterIndex,
             sequentialIndex,
-            verticalIndex
+            verticalIndex,
+            courseStructure
         )!
         
         let config = Container.shared.resolve(ConfigProtocol.self)
@@ -551,7 +559,8 @@ public class Router: AuthorizationRouter,
                         verticalIndex: verticalPosition ?? 0,
                         chapters: courseStructure.childs,
                         chapterIndex: chapterPosition ?? 0,
-                        sequentialIndex: sequentialPosition ?? 0
+                        sequentialIndex: sequentialPosition ?? 0,
+                        courseStructure: courseStructure
                     )
                 }
             } else if !blockLink.isEmpty, let blockURL = URL(string: blockLink) {
@@ -609,7 +618,8 @@ public class Router: AuthorizationRouter,
         chapters: [CourseChapter],
         chapterIndex: Int,
         sequentialIndex: Int,
-        animated: Bool
+        animated: Bool,
+        courseStructure: CourseStructure
     ) {
 
         let controllerUnit = getUnitController(
@@ -619,7 +629,8 @@ public class Router: AuthorizationRouter,
             verticalIndex: verticalIndex,
             chapters: chapters,
             chapterIndex: chapterIndex,
-            sequentialIndex: sequentialIndex
+            sequentialIndex: sequentialIndex,
+            courseStructure: courseStructure
         )
         
         var controllers = navigationController.viewControllers
@@ -636,7 +647,8 @@ public class Router: AuthorizationRouter,
                 title: chapters[chapterIndex].childs[sequentialIndex].displayName,
                 chapters: chapters,
                 chapterIndex: chapterIndex,
-                sequentialIndex: sequentialIndex
+                sequentialIndex: sequentialIndex,
+                courseStructure: courseStructure
             )
 
             controllers.removeLast(2)

@@ -278,6 +278,8 @@ public struct CourseUnitView: View {
                         } else {
                             EmptyView()
                         }
+                    case .needUpgrade:
+                        UpgradeCourseBlockView(viewModel: viewModel)
                     }
 
                 }
@@ -565,23 +567,48 @@ struct CourseUnitView_Previews: PreviewProvider {
                     
                 ])
         ]
-        
-        return CourseUnitView(viewModel: CourseUnitViewModel(
-            lessonID: "",
-            courseID: "",
-            courseName: "courseName",
-            chapters: chapters,
-            chapterIndex: 0,
-            sequentialIndex: 0,
-            verticalIndex: 0,
-            interactor: CourseInteractor.mock,
-            config: ConfigMock(),
-            router: CourseRouterMock(),
-            analytics: CourseAnalyticsMock(),
-            connectivity: Connectivity(),
-            storage: CourseStorageMock(),
-            manager: DownloadManagerMock()
-        ))
+
+        let courseStructure = CourseStructure(
+            id: "123",
+            graded: true,
+            completion: 0,
+            viewYouTubeUrl: "",
+            encodedVideo: "",
+            displayName: "Course 1",
+            topicID: nil,
+            childs: chapters,
+            media: DataLayer.CourseMedia(image: DataLayer.Image(raw: "",
+                                                                small: "",
+                                                                large: "")),
+            certificate: nil,
+            org: "",
+            isSelfPaced: true,
+            isUpgradeable: false,
+            sku: nil,
+            coursewareAccessDetails: nil,
+            courseProgress: nil,
+            lmsPrice: .zero
+        )
+
+        return CourseUnitView(
+            viewModel: CourseUnitViewModel(
+                lessonID: "",
+                courseID: "",
+                courseName: "courseName",
+                chapters: chapters,
+                chapterIndex: 0,
+                sequentialIndex: 0,
+                verticalIndex: 0,
+                courseStructure: courseStructure,
+                interactor: CourseInteractor.mock,
+                config: ConfigMock(),
+                router: CourseRouterMock(),
+                analytics: CourseAnalyticsMock(),
+                connectivity: Connectivity(),
+                storage: CourseStorageMock(),
+                manager: DownloadManagerMock()
+            )
+        )
     }
 }
 //swiftlint:enable all

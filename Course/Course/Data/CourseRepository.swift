@@ -233,7 +233,8 @@ public class CourseRepository: CourseRepositoryProtocol {
             type: BlockType(rawValue: sequential.type) ?? .unknown,
             completion: sequential.completion ?? 0,
             childs: childs,
-            webUrl: sequential.webUrl
+            webUrl: sequential.webUrl,
+            gatedContent: sequential.gatedContent == true
         )
     }
     

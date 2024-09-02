@@ -129,3 +129,7 @@
 "COURSE.DUE_TOMORROW" = "Закінчується завтра";
 
 "COURSE.PROGRESS_COMPLETED" = "%@ з %@ завдань виконано";
+
+"COURSE.GRADED_ASSIGNMENT_LOCKED" = "Graded assignments are locked";
+"COURSE.UPGRADE_TO_GAIN_ACCESS" = "Upgrade to gain access to locked features like this one and get the most out of your course";
+"COURSE.UPGRADE_NOW" = "Upgrade now";

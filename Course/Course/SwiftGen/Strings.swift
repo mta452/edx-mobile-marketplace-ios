@@ -45,10 +45,16 @@ public enum CourseLocalization {
     public static let dueToday = CourseLocalization.tr("Localizable", "COURSE.DUE_TODAY", fallback: "Due Today")
     /// Due Tomorrow
     public static let dueTomorrow = CourseLocalization.tr("Localizable", "COURSE.DUE_TOMORROW", fallback: "Due Tomorrow")
+    /// Graded assignments are locked
+    public static let gradedAssignmentLocked = CourseLocalization.tr("Localizable", "COURSE.GRADED_ASSIGNMENT_LOCKED", fallback: "Graded assignments are locked")
     /// %@ of %@ assignments complete
     public static func progressCompleted(_ p1: Any, _ p2: Any) -> String {
       return CourseLocalization.tr("Localizable", "COURSE.PROGRESS_COMPLETED", String(describing: p1), String(describing: p2), fallback: "%@ of %@ assignments complete")
     }
+    /// Upgrade now
+    public static let upgradeNow = CourseLocalization.tr("Localizable", "COURSE.UPGRADE_NOW", fallback: "Upgrade now")
+    /// Upgrade to gain access to locked features like this one and get the most out of your course
+    public static let upgradeToGainAccess = CourseLocalization.tr("Localizable", "COURSE.UPGRADE_TO_GAIN_ACCESS", fallback: "Upgrade to gain access to locked features like this one and get the most out of your course")
   }
   public enum Courseware {
     /// Back to outline

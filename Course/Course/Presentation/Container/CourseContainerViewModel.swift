@@ -186,7 +186,8 @@ public class CourseContainerViewModel: BaseCourseViewModel {
             verticalIndex: continueWith.verticalIndex,
             chapters: courseStructure.childs,
             chapterIndex: continueWith.chapterIndex,
-            sequentialIndex: continueWith.sequentialIndex
+            sequentialIndex: continueWith.sequentialIndex,
+            courseStructure: courseStructure
         )
         
         self.lastVisitedBlockID = nil

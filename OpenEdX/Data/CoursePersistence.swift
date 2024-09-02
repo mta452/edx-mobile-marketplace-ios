@@ -153,7 +153,8 @@ public class CoursePersistence: CoursePersistenceProtocol {
                         assignmentType: $0.assignmentType,
                         numPointsEarned: $0.numPointsEarned,
                         numPointsPossible: $0.numPointsPossible
-                    )
+                    ),
+                    gatedContent: $0.gatedContent
                 )
             }
             
@@ -211,6 +212,7 @@ public class CoursePersistence: CoursePersistenceProtocol {
                 courseDetail.type = block.type
                 courseDetail.completion = block.completion ?? 0
                 courseDetail.multiDevice = block.multiDevice ?? false
+                courseDetail.gatedContent = block.gatedContent == true
                 if let numPointsEarned = block.assignmentProgress?.numPointsEarned {
                     courseDetail.numPointsEarned = numPointsEarned
                 }

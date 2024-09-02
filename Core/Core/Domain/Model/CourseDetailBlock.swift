@@ -44,6 +44,7 @@ public enum BlockType: String {
     case dragAndDropV2 = "drag-and-drop-v2"
     case openassessment
     case peerInstructionTool = "ubcpi"
+    case locked
     
     public var image: Image {
         switch self {

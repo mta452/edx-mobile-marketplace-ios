@@ -24,7 +24,10 @@ struct CourseUnitDropDownCell: View {
                 HStack {
                     Group {
                         VStack {
-                            if vertical.completion == 1 {
+                            if vertical.type == .locked {
+                                CoreAssets.lockIcon.swiftUIImage
+                                    .renderingMode(.template)
+                            } else if vertical.completion == 1 {
                                 CoreAssets.finished.swiftUIImage
                                     .renderingMode(.template)
                                     .foregroundColor(Theme.Colors.accentXColor)
@@ -56,7 +59,6 @@ struct CourseUnitDropDownCell: View {
         .background(
             isSelected ? Color.secondary.opacity(0.2) : Color.clear
         )
-
     }
 }
 

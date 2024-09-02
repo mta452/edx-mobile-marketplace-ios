@@ -76,64 +76,86 @@ final class CourseUnitViewModelTests: XCTestCase {
     
     let chapters = [
         CourseChapter(
-        blockId: "0",
-        id: "0",
-        displayName: "0",
-        type: .chapter,
-        childs: [
-            CourseSequential(
-                blockId: "5",
-                id: "5",
-                displayName: "5",
-                type: .sequential,
-                completion: 0,
-                childs: [
-                    CourseVertical(
-                        blockId: "6",
-                        id: "6",
-                        courseId: "123",
-                        displayName: "6",
-                        type: .vertical,
-                        completion: 0,
-                        childs: blocks,
-                        webUrl: ""
-                    )
-                ],
-                sequentialProgress: nil,
-                due: Date()
-            )
-            
-        ]),
-        CourseChapter(
-        blockId: "2",
-        id: "2",
-        displayName: "2",
-        type: .chapter,
-        childs: [
-            CourseSequential(
-                blockId: "3",
-                id: "3",
-                displayName: "3",
-                type: .sequential,
-                completion: 0,
-                childs: [
-                    CourseVertical(
-                        blockId: "4",
-                        id: "4",
-                        courseId: "123",
-                        displayName: "4",
-                        type: .vertical,
-                        completion: 0,
-                        childs: blocks,
-                        webUrl: ""
-                    )
-                ],
-                sequentialProgress: nil,
-                due: Date()
-            )
-            
-        ])
-        ]
+            blockId: "0",
+            id: "0",
+            displayName: "0",
+            type: .chapter,
+            childs: [
+                CourseSequential(
+                    blockId: "5",
+                    id: "5",
+                    displayName: "5",
+                    type: .sequential,
+                    completion: 0,
+                    childs: [
+                        CourseVertical(
+                            blockId: "6",
+                            id: "6",
+                            courseId: "123",
+                            displayName: "6",
+                            type: .vertical,
+                            completion: 0,
+                            childs: blocks,
+                            webUrl: ""
+                        )
+                    ],
+                    sequentialProgress: nil,
+                    due: Date()
+                )
+                
+            ]),
+            CourseChapter(
+            blockId: "2",
+            id: "2",
+            displayName: "2",
+            type: .chapter,
+            childs: [
+                CourseSequential(
+                    blockId: "3",
+                    id: "3",
+                    displayName: "3",
+                    type: .sequential,
+                    completion: 0,
+                    childs: [
+                        CourseVertical(
+                            blockId: "4",
+                            id: "4",
+                            courseId: "123",
+                            displayName: "4",
+                            type: .vertical,
+                            completion: 0,
+                            childs: blocks,
+                            webUrl: ""
+                        )
+                    ],
+                    sequentialProgress: nil,
+                    due: Date()
+                )
+            ]
+        )
+    ]
+
+    let courseStructure = CourseStructure(
+        id: "123",
+        graded: true,
+        completion: 0,
+        viewYouTubeUrl: "",
+        encodedVideo: "",
+        displayName: "Course 1",
+        topicID: nil,
+        childs: [],
+        media: DataLayer.CourseMedia(image: DataLayer.Image(raw: "",
+                                                            small: "",
+                                                            large: "")),
+        certificate: nil,
+        org: "",
+        isSelfPaced: true,
+        isUpgradeable: false,
+        sku: nil,
+        coursewareAccessDetails: nil,
+        courseProgress: nil,
+        lmsPrice: .zero
+    )
     
     func testBlockCompletionRequestSuccess() async throws {
         let interactor = CourseInteractorProtocolMock()
@@ -149,6 +171,7 @@ final class CourseUnitViewModelTests: XCTestCase {
             chapterIndex: 0,
             sequentialIndex: 0,
             verticalIndex: 0,
+            courseStructure: courseStructure,
             interactor: interactor,
             config: config,
             router: router,
@@ -179,6 +202,7 @@ final class CourseUnitViewModelTests: XCTestCase {
             chapterIndex: 0,
             sequentialIndex: 0,
             verticalIndex: 0,
+            courseStructure: courseStructure,
             interactor: interactor,
             config: config,
             router: router,
@@ -214,6 +238,7 @@ final class CourseUnitViewModelTests: XCTestCase {
             chapterIndex: 0,
             sequentialIndex: 0,
             verticalIndex: 0,
+            courseStructure: courseStructure,
             interactor: interactor,
             config: config,
             router: router,
@@ -251,6 +276,7 @@ final class CourseUnitViewModelTests: XCTestCase {
             chapterIndex: 0,
             sequentialIndex: 0,
             verticalIndex: 0,
+            courseStructure: courseStructure,
             interactor: interactor,
             config: config,
             router: router,
@@ -287,6 +313,7 @@ final class CourseUnitViewModelTests: XCTestCase {
             chapterIndex: 0,
             sequentialIndex: 0,
             verticalIndex: 0,
+            courseStructure: courseStructure,
             interactor: interactor,
             config: config,
             router: router,

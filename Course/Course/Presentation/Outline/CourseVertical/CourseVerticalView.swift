@@ -19,17 +19,20 @@ public struct CourseVerticalView: View {
     @ObservedObject
     private var viewModel: CourseVerticalViewModel
     private var idiom: UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
+    private var courseStructure: CourseStructure
     
     public init(
         title: String,
         courseName: String,
         courseID: String,
-        viewModel: CourseVerticalViewModel
+        viewModel: CourseVerticalViewModel,
+        courseStructure: CourseStructure
     ) {
         self.title = title
         self.courseName = courseName
         self.courseID = courseID
         self.viewModel = viewModel
+        self.courseStructure = courseStructure
     }
     
     public var body: some View {
@@ -57,7 +60,8 @@ public struct CourseVerticalView: View {
                                             verticalIndex: index,
                                             chapters: viewModel.chapters,
                                             chapterIndex: viewModel.chapterIndex,
-                                            sequentialIndex: viewModel.sequentialIndex
+                                            sequentialIndex: viewModel.sequentialIndex,
+                                            courseStructure: courseStructure
                                         )
                                     }
                                 }, label: {
@@ -215,6 +219,28 @@ struct CourseVerticalView_Previews: PreviewProvider {
                     )
                 ])
         ]
+
+        let courseStructure = CourseStructure(
+            id: "123",
+            graded: true,
+            completion: 0,
+            viewYouTubeUrl: "",
+            encodedVideo: "",
+            displayName: "",
+            topicID: nil,
+            childs: chapters,
+            media: DataLayer.CourseMedia(image: DataLayer.Image(raw: "",
+                                                                small: "",
+                                                                large: "")),
+            certificate: nil,
+            org: "",
+            isSelfPaced: true,
+            isUpgradeable: false,
+            sku: nil,
+            coursewareAccessDetails: nil,
+            courseProgress: nil,
+            lmsPrice: .zero
+        )
         
         let viewModel = CourseVerticalViewModel(
             chapters: chapters,
@@ -231,7 +257,8 @@ struct CourseVerticalView_Previews: PreviewProvider {
                 title: "Course title",
                 courseName: "CourseName",
                 courseID: "1",
-                viewModel: viewModel
+                viewModel: viewModel,
+                courseStructure: courseStructure
             )
             .preferredColorScheme(.light)
             .previewDisplayName("CourseVerticalView Light")
@@ -240,7 +267,8 @@ struct CourseVerticalView_Previews: PreviewProvider {
                 title: "Course title",
                 courseName: "CourseName",
                 courseID: "1",
-                viewModel: viewModel
+                viewModel: viewModel,
+                courseStructure: courseStructure
             )
             .preferredColorScheme(.dark)
             .previewDisplayName("CourseVerticalView Dark")

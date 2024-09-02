@@ -99,26 +99,29 @@ struct CustomDisclosureGroup: View {
                                                     viewModel.router.showGatedContentError(url: courseVertical.webUrl)
                                                     return
                                                 }
+                                                guard let courseStructure = viewModel.courseStructure else { return }
 
                                                 viewModel.trackSequentialClicked(sequential)
                                                 if viewModel.config.uiComponents.courseDropDownNavigationEnabled {
                                                     viewModel.router.showCourseUnit(
-                                                        courseName: viewModel.courseStructure?.displayName ?? "",
+                                                        courseName: courseStructure.displayName,
                                                         blockId: block.id,
-                                                        courseID: viewModel.courseStructure?.id ?? "",
+                                                        courseID: courseStructure.id,
                                                         verticalIndex: 0,
                                                         chapters: course.childs,
                                                         chapterIndex: chapterIndex,
-                                                        sequentialIndex: sequentialIndex
+                                                        sequentialIndex: sequentialIndex,
+                                                        courseStructure: courseStructure
                                                     )
                                                 } else {
                                                     viewModel.router.showCourseVerticalView(
-                                                        courseID: viewModel.courseStructure?.id ?? "",
-                                                        courseName: viewModel.courseStructure?.displayName ?? "",
+                                                        courseID: courseStructure.id,
+                                                        courseName: courseStructure.displayName,
                                                         title: sequential.displayName,
                                                         chapters: course.childs,
                                                         chapterIndex: chapterIndex,
-                                                        sequentialIndex: sequentialIndex
+                                                        sequentialIndex: sequentialIndex,
+                                                        courseStructure: courseStructure
                                                     )
                                                 }
                                             },
