@@ -184,6 +184,7 @@
 		A51CDBE72B6D21F2009B6D4E /* SegmentConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51CDBE62B6D21F2009B6D4E /* SegmentConfig.swift */; };
 		A53A32352B233DEC005FE38A /* ThemeConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53A32342B233DEC005FE38A /* ThemeConfig.swift */; };
 		A595689B2B6173DF00ED4F90 /* BranchConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A595689A2B6173DF00ED4F90 /* BranchConfig.swift */; };
+		A5986EF72C9C647600CF4B5D /* LiveChatConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5986EF62C9C647600CF4B5D /* LiveChatConfig.swift */; };
 		A5CAA1EC2C526901007690D9 /* SecureInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CAA1EB2C526901007690D9 /* SecureInputView.swift */; };
 		A5F4E7B52B61544A00ACD166 /* BrazeConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F4E7B42B61544A00ACD166 /* BrazeConfig.swift */; };
 		BA30427F2B20B320009B64B7 /* SocialAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30427D2B20B299009B64B7 /* SocialAuthError.swift */; };
@@ -417,6 +418,7 @@
 		A51CDBE62B6D21F2009B6D4E /* SegmentConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentConfig.swift; sourceTree = "<group>"; };
 		A53A32342B233DEC005FE38A /* ThemeConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeConfig.swift; sourceTree = "<group>"; };
 		A595689A2B6173DF00ED4F90 /* BranchConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchConfig.swift; sourceTree = "<group>"; };
+		A5986EF62C9C647600CF4B5D /* LiveChatConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveChatConfig.swift; sourceTree = "<group>"; };
 		A5CAA1EB2C526901007690D9 /* SecureInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecureInputView.swift; path = Core/View/Base/SecureInputView.swift; sourceTree = SOURCE_ROOT; };
 		A5F4E7B42B61544A00ACD166 /* BrazeConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrazeConfig.swift; sourceTree = "<group>"; };
 		BA30427D2B20B299009B64B7 /* SocialAuthError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialAuthError.swift; sourceTree = "<group>"; };
@@ -1047,6 +1049,7 @@
 				A53A32342B233DEC005FE38A /* ThemeConfig.swift */,
 				E0D586192B2FF74C009B4BA7 /* DiscoveryConfig.swift */,
 				14D912D82C2553C70077CCCE /* FullStoryConfig.swift */,
+				A5986EF62C9C647600CF4B5D /* LiveChatConfig.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -1426,6 +1429,7 @@
 				062C69BB2C199C2A002BD311 /* MainTab.swift in Sources */,
 				02CA59842BD7DDBE00D517AA /* DashboardConfig.swift in Sources */,
 				0727877B28D24A1D002E9142 /* HeadersRedirectHandler.swift in Sources */,
+				A5986EF72C9C647600CF4B5D /* LiveChatConfig.swift in Sources */,
 				0236961B28F9A28B00EEF206 /* AuthInteractor.swift in Sources */,
 				A5CAA1EC2C526901007690D9 /* SecureInputView.swift in Sources */,
 				0770DE3028D09793006D8A5D /* EndPointType.swift in Sources */,

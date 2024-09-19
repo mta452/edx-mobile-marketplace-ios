@@ -158,6 +158,15 @@ struct MainScreenView: View {
                             .foregroundColor(Theme.Colors.accentColor)
                     })
                     .accessibilityIdentifier("edit_profile_button")
+                } else {
+                    Button(action: {
+                        let router = Container.shared.resolve(DashboardRouter.self)!
+                        router.showLiveChat(animated: true)
+                    }, label: {
+                        Image(systemName: "exclamationmark.bubble")
+                            .foregroundColor(Theme.Colors.accentColor)
+                    })
+                    .accessibilityIdentifier("live_chat_button")
                 }
             })
         }

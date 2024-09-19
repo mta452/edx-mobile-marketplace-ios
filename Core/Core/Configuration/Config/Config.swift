@@ -33,6 +33,7 @@ public protocol ConfigProtocol {
     var URIScheme: String { get }
     var ecommerceURL: String? { get }
     var fullStory: FullStoryConfig { get }
+    var liveChat: LiveChatConfig { get }
 }
 
 public enum TokenType: String {
