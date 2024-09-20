@@ -8,7 +8,10 @@
 import SwiftUI
 
 public struct XpertFive9ChatView: View {
+    @Environment(\.dismiss) private var dismiss
+    
     @StateObject var model: XpertFive9ChatViewModel
+    @State var closeChat: Bool = false
     
     public init(configuration: XpertFive9ChatConfiguration) {
         self._model = .init(wrappedValue: XpertFive9ChatViewModel(configuration: configuration))
@@ -16,7 +19,13 @@ public struct XpertFive9ChatView: View {
     
     public var body: some View {
         VStack {
-            XpertFive9HTMLWebViewRepresentable(html: model.html, baseURL: nil)
+            XpertFive9HTMLWebViewRepresentable(html: model.html, baseURL: nil, closeChat: $closeChat)
+        }
+        .onChange(of: closeChat) { newValue in
+            if newValue {
+                dismiss()
+                closeChat = false
+            }
         }
     }
 }

@@ -69,6 +69,16 @@ public class XpertFive9ChatViewModel: ObservableObject {
                                     button.isClicked = true;
                                 }
                             }
+                            var xpertCloseButton = document.getElementsByClassName("xpert-chatbot-popup__header--btn-outline")[0];
+                            if (xpertCloseButton != undefined) {
+                                xpertCloseButton.addEventListener(
+                                    "click",
+                                    function(e) {
+                                        window.webkit.messageHandlers.###closeChat###.postMessage("###closeChat###");
+                                    },
+                                    false
+                                );
+                            }
                         },
                         false
                     );
@@ -81,6 +91,7 @@ public class XpertFive9ChatViewModel: ObservableObject {
             .replacingOccurrences(of: "###APPID###", with: configuration.appId)
             .replacingOccurrences(of: "###CONFIGID###", with: configuration.configID)
             .replacingOccurrences(of: "###SEGMENTKEY###", with: configuration.segmentKey)
+            .replacingOccurrences(of: "###closeChat###", with: WKScriptEvent.closeChat.rawValue)
     }
     
 }
