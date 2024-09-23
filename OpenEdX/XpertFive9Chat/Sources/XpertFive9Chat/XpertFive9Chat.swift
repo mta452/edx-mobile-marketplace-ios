@@ -5,8 +5,13 @@ import SwiftUI
 
 public class XpertFive9Chat {
     @MainActor
-    public class func show(on topController: UIViewController, config: XpertFive9ChatConfiguration, animated: Bool) {
-        let chatView = XpertFive9ChatView(configuration: config)
+    public class func show(
+        on topController: UIViewController,
+        xpertConfig: XpertChatConfiguration,
+        five9Config: Five9ChatConfiguration,
+        animated: Bool
+    ) {
+        let chatView = XpertFive9ChatView(xpertConfig: xpertConfig, five9Config: five9Config)
         let controller = UIHostingController(rootView: chatView)
         controller.modalTransitionStyle = .coverVertical
         controller.modalPresentationStyle = .pageSheet

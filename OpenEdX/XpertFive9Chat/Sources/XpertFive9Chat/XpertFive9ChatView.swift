@@ -13,13 +13,13 @@ public struct XpertFive9ChatView: View {
     @StateObject var model: XpertFive9ChatViewModel
     @State var closeChat: Bool = false
     
-    public init(configuration: XpertFive9ChatConfiguration) {
-        self._model = .init(wrappedValue: XpertFive9ChatViewModel(configuration: configuration))
+    public init(xpertConfig: XpertChatConfiguration, five9Config: Five9ChatConfiguration) {
+        self._model = .init(wrappedValue: XpertFive9ChatViewModel(xpertConfig: xpertConfig, five9Config: five9Config))
     }
     
     public var body: some View {
         VStack {
-            XpertFive9HTMLWebViewRepresentable(html: model.html, baseURL: nil, closeChat: $closeChat)
+            XpertFive9HTMLWebViewRepresentable(html: model.xpertHTML, baseURL: nil, closeChat: $closeChat)
                 .ignoresSafeArea(.keyboard)
         }
         .onChange(of: closeChat) { newValue in
@@ -34,8 +34,19 @@ public struct XpertFive9ChatView: View {
 #if DEBUG
 struct XpertFive9ChatView_Previews: PreviewProvider {
     static var previews: some View {
-        let config = XpertFive9ChatConfiguration(appId: "", xpertKey: "", configID: "", useCase: "", segmentKey: "")
-        XpertFive9ChatView(configuration: config)
+        let xpertConfig = XpertChatConfiguration(xpertKey: "", useCase: "", segmentKey: "")
+        let five9Config = Five9ChatConfiguration(
+            appId: "",
+            configID: "",
+            formSubtitle: "",
+            userName: "",
+            userFirstName: "",
+            userLastName: "",
+            userEmail: "",
+            formFields: [],
+            formdataLabel: ""
+        )
+        XpertFive9ChatView(xpertConfig: xpertConfig, five9Config: five9Config)
     }
 }
 #endif

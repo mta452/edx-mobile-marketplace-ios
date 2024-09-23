@@ -7,18 +7,59 @@
 
 import Foundation
 
-public struct XpertFive9ChatConfiguration {
-    var appId: String
+// Xpert
+public struct XpertChatConfiguration {
     var xpertKey: String
-    var configID: String
     var useCase: String
     var segmentKey: String
     
-    public init(appId: String, xpertKey: String, configID: String, useCase: String, segmentKey: String) {
-        self.appId = appId
+    public init(xpertKey: String, useCase: String, segmentKey: String) {
         self.xpertKey = xpertKey
-        self.configID = configID
         self.useCase = useCase
         self.segmentKey = segmentKey
+    }
+}
+
+// Five9
+public enum Five9FormDataField {
+    case contactName
+    case contactEmail
+    case question
+    case formLabel
+    case contactFirstName
+    case contactLastName
+}
+
+public struct Five9ChatConfiguration {
+    var appId: String
+    var configID: String
+    var formSubtitle: String
+    var userName: String
+    var userFirstName: String
+    var userLastName: String
+    var userEmail: String
+    var formFields: [Five9FormDataField]
+    var formdataLabel: String
+    
+    public init(
+        appId: String,
+        configID: String,
+        formSubtitle: String,
+        userName: String,
+        userFirstName: String,
+        userLastName: String,
+        userEmail: String,
+        formFields: [Five9FormDataField],
+        formdataLabel: String
+    ) {
+        self.appId = appId
+        self.configID = configID
+        self.formSubtitle = formSubtitle
+        self.userName = userName
+        self.userFirstName = userFirstName
+        self.userLastName = userLastName
+        self.userEmail = userEmail
+        self.formFields = formFields
+        self.formdataLabel = formdataLabel
     }
 }

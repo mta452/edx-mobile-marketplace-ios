@@ -11,6 +11,7 @@ import WebKit
 
 enum WKScriptEvent: String {
     case closeChat
+    case openChat
 }
 
 struct XpertFive9HTMLWebViewRepresentable: UIViewRepresentable {

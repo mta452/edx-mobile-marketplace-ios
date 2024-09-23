@@ -911,16 +911,27 @@ extension Router {
     @MainActor
     public func showLiveChat(animated: Bool) {
         let config = Container.shared.resolve(ConfigProtocol.self)!
+        let xpertConfig = XpertChatConfiguration(
+            xpertKey: config.liveChat.xpertKey,
+            useCase: config.liveChat.useCase,
+            segmentKey: config.liveChat.segmentKey
+        )
+        let five9Config = Five9ChatConfiguration(
+            appId: config.liveChat.appId,
+            configID: config.liveChat.configId,
+            formSubtitle: "",
+            userName: "",
+            userFirstName: "",
+            userLastName: "",
+            userEmail: "",
+            formFields: [],
+            formdataLabel: ""
+        )
         if config.liveChat.enabled {
             XpertFive9Chat.show(
                 on: navigationController,
-                config: XpertFive9ChatConfiguration(
-                    appId: config.liveChat.appId,
-                    xpertKey: config.liveChat.xpertKey,
-                    configID: config.liveChat.configId,
-                    useCase: config.liveChat.useCase,
-                    segmentKey: config.liveChat.segmentKey
-                ),
+                xpertConfig: xpertConfig,
+                five9Config: five9Config,
                 animated: true
             )
         }
