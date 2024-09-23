@@ -20,6 +20,7 @@ public struct XpertFive9ChatView: View {
     public var body: some View {
         VStack {
             XpertFive9HTMLWebViewRepresentable(html: model.html, baseURL: nil, closeChat: $closeChat)
+                .ignoresSafeArea(.keyboard)
         }
         .onChange(of: closeChat) { newValue in
             if newValue {
