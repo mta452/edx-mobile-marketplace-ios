@@ -7,15 +7,22 @@
 
 import Foundation
 
+public enum ChatBotType {
+    case five9
+    case xpert
+}
+
 public class XpertFive9ChatViewModel: ObservableObject {
     public var xpertConfiguration: XpertChatConfiguration
     public var five9Configuration: Five9ChatConfiguration
+    @Published public var currentChatType: ChatBotType = .xpert
     
     init(xpertConfig: XpertChatConfiguration, five9Config: Five9ChatConfiguration) {
         self.xpertConfiguration = xpertConfig
         self.five9Configuration = five9Config
     }
-    
+        
+    // MARK: Five9
     // swiftlint:disable line_length
     public var five9HTML: String {
         """
@@ -23,6 +30,11 @@ public class XpertFive9ChatViewModel: ObservableObject {
             <head>
                 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, \
                 viewport-fit=cover">
+                <style id="fit-graphics">
+                    iframe {
+                        width: 100% !important;
+                    }
+                </style>
             </head>
             <body>
                 <script src="https://live-chat.ps.five9.com/Five9ChatPlugin.js" type="text/javascript"></script>
@@ -70,10 +82,10 @@ public class XpertFive9ChatViewModel: ObservableObject {
             </body>
         </html>
         """
+            .replacingOccurrences(of: "###FORMDATA###", with: formDataString(formFields: five9Configuration.formFields))
             .replacingOccurrences(of: "###SUBTITLE###", with: five9Configuration.formSubtitle)
             .replacingOccurrences(of: "###EMAIL###", with: five9Configuration.userEmail)
             .replacingOccurrences(of: "###CONFIGID###", with: five9Configuration.configID)
-            .replacingOccurrences(of: "###FORMDATA###", with: formDataString(formFields: five9Configuration.formFields))
             .replacingOccurrences(of: "###APPID###", with: five9Configuration.appId)
             .replacingOccurrences(of: "###openChat###", with: WKScriptEvent.openChat.rawValue)
             .replacingOccurrences(of: "###closeChat###", with: WKScriptEvent.closeChat.rawValue)
@@ -81,9 +93,34 @@ public class XpertFive9ChatViewModel: ObservableObject {
     }
     
     func formDataString(formFields: [Five9FormDataField]) -> String {
-        ""
+        var dataString: String = ""
+        dataString.append("[")
+        for field in formFields {
+            dataString.append(
+                """
+                {
+                    "type": "hidden",
+                    "formType": "both",
+                    "required": false
+                },
+                """
+            )
+            dataString.append(
+                field.formDataString(
+                    emailLabel: five9Configuration.emailLabel,
+                    questionLabel: five9Configuration.questionLabel
+                )
+            )
+        }
+        dataString.append("]")
+        return dataString
+            .replacingOccurrences(of: "###FIRSTNAME###", with: five9Configuration.userFirstName)
+            .replacingOccurrences(of: "###LASTNAME###", with: five9Configuration.userLastName)
+            .replacingOccurrences(of: "###EMAIL###", with: five9Configuration.userEmail)
+            .replacingOccurrences(of: "###LABEL###", with: five9Configuration.formdataLabel)
     }
     
+    // MARK: Xpert
     public var xpertHTML: String {
         """
         <html>
@@ -148,6 +185,16 @@ public class XpertFive9ChatViewModel: ObservableObject {
                                     false
                                 );
                             }
+                            var five9OpenButton = document.getElementsByClassName("xpert-chatbot-popup__live-chat--btn-outline")[0];
+                            if (five9OpenButton != undefined) {
+                                five9OpenButton.addEventListener(
+                                    "click",
+                                    function(e) {
+                                        window.webkit.messageHandlers.###shouldOpenFive9###.postMessage("###shouldOpenFive9###");
+                                    },
+                                    false
+                                );
+                            }
                         },
                         false
                     );
@@ -160,6 +207,7 @@ public class XpertFive9ChatViewModel: ObservableObject {
             .replacingOccurrences(of: "###APPID###", with: five9Configuration.appId)
             .replacingOccurrences(of: "###SEGMENTKEY###", with: xpertConfiguration.segmentKey)
             .replacingOccurrences(of: "###closeChat###", with: WKScriptEvent.closeChat.rawValue)
+            .replacingOccurrences(of: "###shouldOpenFive9###", with: WKScriptEvent.shouldOpenFive9.rawValue)
     }
     // swiftlint:enable line_length
     

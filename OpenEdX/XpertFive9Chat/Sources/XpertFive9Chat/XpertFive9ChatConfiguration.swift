@@ -28,6 +28,82 @@ public enum Five9FormDataField {
     case formLabel
     case contactFirstName
     case contactLastName
+    
+    func formDataString(emailLabel: String, questionLabel: String) -> String {
+        var formDataString: String = ""
+        formDataString.append("{")
+        switch self {
+        case .contactName:
+            formDataString.append(
+                """
+                "label": "Name",
+                "cav": "contact.name",
+                "formType": "both",
+                "type": "text",
+                "required": true,
+                "readOnly": false,
+                "value": "###NAME###"
+                """
+            )
+        case .contactEmail:
+            formDataString.append(
+                """
+                "label": "\(emailLabel)",
+                "cav": "contact.email",
+                "formType": "both",
+                "type": "email",
+                "required": true,
+                "value": "###EMAIL###"
+                """
+            )
+        case .question:
+            formDataString.append(
+                """
+                "label": "\(questionLabel)",
+                "cav": "Question",
+                "formType": "both",
+                "type": "textarea",
+                "required": true,
+                "readOnly": false
+                """
+            )
+        case .formLabel:
+            formDataString.append(
+                """
+                "type": "static text",
+                "formType": "both",
+                "required": false,
+                "label": '###LABEL###'
+                """
+            )
+        case .contactFirstName:
+            formDataString.append(
+                """
+                "label": "First Name",
+                "cav": "contact.firstName",
+                "formType": "both",
+                "type": "text",
+                "required": true,
+                "readOnly": false,
+                "value": "###FIRSTNAME###"
+                """
+            )
+        case .contactLastName:
+            formDataString.append(
+                """
+                "label": "Last Name",
+                "cav": "contact.lastName",
+                "formType": "both",
+                "type": "text",
+                "required": true,
+                "readOnly": false,
+                "value": "###LASTNAME###"
+                """
+            )
+        }
+        formDataString.append("},")
+        return formDataString
+    }
 }
 
 public struct Five9ChatConfiguration {
@@ -40,6 +116,8 @@ public struct Five9ChatConfiguration {
     var userEmail: String
     var formFields: [Five9FormDataField]
     var formdataLabel: String
+    var emailLabel: String
+    var questionLabel: String
     
     public init(
         appId: String,
@@ -50,7 +128,9 @@ public struct Five9ChatConfiguration {
         userLastName: String,
         userEmail: String,
         formFields: [Five9FormDataField],
-        formdataLabel: String
+        formdataLabel: String,
+        emailLabel: String,
+        questionLabel: String
     ) {
         self.appId = appId
         self.configID = configID
@@ -61,5 +141,7 @@ public struct Five9ChatConfiguration {
         self.userEmail = userEmail
         self.formFields = formFields
         self.formdataLabel = formdataLabel
+        self.emailLabel = emailLabel
+        self.questionLabel = questionLabel
     }
 }

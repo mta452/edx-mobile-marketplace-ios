@@ -12,6 +12,7 @@ public struct XpertFive9ChatView: View {
     
     @StateObject var model: XpertFive9ChatViewModel
     @State var closeChat: Bool = false
+    @State var openFive9: Bool = false
     
     public init(xpertConfig: XpertChatConfiguration, five9Config: Five9ChatConfiguration) {
         self._model = .init(wrappedValue: XpertFive9ChatViewModel(xpertConfig: xpertConfig, five9Config: five9Config))
@@ -19,13 +20,24 @@ public struct XpertFive9ChatView: View {
     
     public var body: some View {
         VStack {
-            XpertFive9HTMLWebViewRepresentable(html: model.xpertHTML, baseURL: nil, closeChat: $closeChat)
-                .ignoresSafeArea(.keyboard)
+            XpertFive9HTMLWebViewRepresentable(
+                html: model.currentChatType == .xpert ? model.xpertHTML : model.five9HTML,
+                baseURL: nil,
+                closeChat: $closeChat,
+                openFive9: $openFive9
+            )
+            .ignoresSafeArea(.keyboard)
         }
         .onChange(of: closeChat) { newValue in
             if newValue {
                 dismiss()
                 closeChat = false
+            }
+        }
+        .onChange(of: openFive9) { newValue in
+            if newValue {
+                model.currentChatType = .five9
+                openFive9 = false
             }
         }
     }
@@ -44,7 +56,9 @@ struct XpertFive9ChatView_Previews: PreviewProvider {
             userLastName: "",
             userEmail: "",
             formFields: [],
-            formdataLabel: ""
+            formdataLabel: "",
+            emailLabel: "",
+            questionLabel: ""
         )
         XpertFive9ChatView(xpertConfig: xpertConfig, five9Config: five9Config)
     }
