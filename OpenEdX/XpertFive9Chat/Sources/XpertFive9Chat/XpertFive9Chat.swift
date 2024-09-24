@@ -14,7 +14,7 @@ public class XpertFive9Chat {
         let chatView = XpertFive9ChatView(xpertConfig: xpertConfig, five9Config: five9Config)
         let controller = UIHostingController(rootView: chatView)
         controller.modalTransitionStyle = .coverVertical
-        controller.modalPresentationStyle = .pageSheet
+        controller.modalPresentationStyle = .automatic
         topController.present(controller, animated: animated)
     }
 }

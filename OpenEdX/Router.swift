@@ -918,16 +918,7 @@ extension Router {
         )
         let five9Config = Five9ChatConfiguration(
             appId: config.liveChat.appId,
-            configID: config.liveChat.configId,
-            formSubtitle: "Form Subtitle text",
-            userName: "userName text",
-            userFirstName: "FirstName text",
-            userLastName: "LastName text",
-            userEmail: "dummy@email.com",
-            formFields: [.contactName, .contactEmail, .question, .formLabel],
-            formdataLabel: "FormDataLabel text",
-            emailLabel: "emailLabel text",
-            questionLabel: "Question text"
+            configID: config.liveChat.configId
         )
         if config.liveChat.enabled {
             XpertFive9Chat.show(
