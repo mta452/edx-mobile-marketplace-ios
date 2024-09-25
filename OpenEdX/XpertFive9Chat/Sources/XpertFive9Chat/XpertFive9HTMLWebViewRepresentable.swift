@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import WebKit
+import SafariServices
 
 enum WKScriptEvent: String {
     case closeChat
@@ -32,7 +33,15 @@ struct XpertFive9HTMLWebViewRepresentable: UIViewRepresentable {
         webView.navigationDelegate = context.coordinator
         webView.uiDelegate = context.coordinator
         webView.backgroundColor = .clear
-        
+
+        #if DEBUG
+        if #available(iOS 16.4, *) {
+            webView.isInspectable = true
+        } else {
+            // Fallback on earlier versions
+        }
+        #endif
+
         webView.configuration.userContentController.add(
             context.coordinator,
             name: WKScriptEvent.closeChat.rawValue
@@ -78,6 +87,17 @@ extension XpertFive9HTMLWebViewRepresentable {
                     closeChat = true
                 }
             }
+        }
+
+        func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+            if navigationAction.targetFrame == nil,
+                let url = navigationAction.request.url {
+                let controller = SFSafariViewController(url: url)
+                controller.modalPresentationStyle = .pageSheet
+                UIApplication.shared.rootViewController?.present(controller, animated: true)
+            }
+            print("WebView createWebViewWith")
+            return nil
         }
     }
 }

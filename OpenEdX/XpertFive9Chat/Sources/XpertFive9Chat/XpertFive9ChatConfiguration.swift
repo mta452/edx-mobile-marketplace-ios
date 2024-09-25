@@ -19,17 +19,3 @@ public struct XpertChatConfiguration {
         self.segmentKey = segmentKey
     }
 }
-
-// Five9
-public struct Five9ChatConfiguration {
-    var appId: String
-    var configID: String
-    
-    public init(
-        appId: String,
-        configID: String
-    ) {
-        self.appId = appId
-        self.configID = configID
-    }
-}

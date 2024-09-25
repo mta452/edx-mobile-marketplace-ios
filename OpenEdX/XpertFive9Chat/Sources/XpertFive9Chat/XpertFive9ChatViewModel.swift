@@ -8,84 +8,13 @@
 import Foundation
 
 public class XpertFive9ChatViewModel: ObservableObject {
-    public var xpertConfiguration: XpertChatConfiguration
-    public var five9Configuration: Five9ChatConfiguration
+    private var xpertConfiguration: XpertChatConfiguration
     
-    init(xpertConfig: XpertChatConfiguration, five9Config: Five9ChatConfiguration) {
+    init(xpertConfig: XpertChatConfiguration) {
         self.xpertConfiguration = xpertConfig
-        self.five9Configuration = five9Config
     }
         
-    // MARK: Five9
     // swiftlint:disable line_length
-    public var five9HTML: String {
-        """
-        <html>
-            <head>
-                <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, \
-                viewport-fit=cover">
-                <style id="fit-graphics">
-                    iframe {
-                        width: 100% !important;
-                    }
-                </style>
-            </head>
-            <body>
-                <script src="https://live-chat.ps.five9.com/Five9ChatPlugin.js" type="text/javascript"></script>
-                <script>
-                    function callback(event) {
-                        try {
-                            switch (event.type) {
-                            case 'initialized':
-                                window.webkit.messageHandlers.###openChat###.postMessage("###openChat###");
-                                break;
-                            case 'error':
-                                if (event.error == "No active chat session") {
-                                    window.webkit.messageHandlers.###closeChat###.postMessage("###closeChat###");
-                                }
-                                break;
-                            case 'endChatConfirmed':
-                                window.webkit.messageHandlers.###closeChat###.postMessage("###closeChat###");
-                                break;
-                            default:
-                                break;
-                        }
-                        } catch (exception) {}
-                    }
-                    let options = {
-                        "appId": "###APPID###",
-                        "configId": "###CONFIGID###",
-                        "headless": true,
-                        "startOpen": true,
-                        "allowAttachments": true,
-                        "allowPopout": false,
-                        "hideMinimize": true,
-                        "miniForm": true,
-                        "subtitle": "###SUBTITLE###",
-                        "contact": {
-                            "email": "###EMAIL###",
-                            "name": "###NAME###"
-                        },
-                        "sendButtonText": "<img src='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjUxMnB4IiBoZWlnaHQ9IjUxMnB4IiB2aWV3Qm94PSIwIDAgNTM1LjUgNTM1LjUiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUzNS41IDUzNS41OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxnPgoJPGcgaWQ9InNlbmQiPgoJCTxwb2x5Z29uIHBvaW50cz0iMCw0OTcuMjUgNTM1LjUsMjY3Ljc1IDAsMzguMjUgMCwyMTYuNzUgMzgyLjUsMjY3Ljc1IDAsMzE4Ljc1ICAgIiBmaWxsPSIjY2JjYmNiIi8+Cgk8L2c+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==' class='rcw-send-icon' alt='Send'>",
-                        "sendButtonActiveText": "<img src='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjUxMnB4IiBoZWlnaHQ9IjUxMnB4IiB2aWV3Qm94PSIwIDAgNTM1LjUgNTM1LjUiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUzNS41IDUzNS41OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxnPgoJPGcgaWQ9InNlbmQiPgoJCTxwb2x5Z29uIHBvaW50cz0iMCw0OTcuMjUgNTM1LjUsMjY3Ljc1IDAsMzguMjUgMCwyMTYuNzUgMzgyLjUsMjY3Ljc1IDAsMzE4Ljc1ICAgIiBmaWxsPSIjY2JjYmNiIi8+Cgk8L2c+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==' class='rcw-send-icon' alt='Send' style='filter: contrast(0)' >",
-                        "formData": ###FORMDATA###
-                    };
-                    options.callback = callback;
-                    Five9ChatPlugin(options);
-                </script>
-            </body>
-        </html>
-        """
-//            .replacingOccurrences(of: "###FORMDATA###", with: formDataString(formFields: five9Configuration.formFields))
-//            .replacingOccurrences(of: "###SUBTITLE###", with: five9Configuration.formSubtitle)
-//            .replacingOccurrences(of: "###EMAIL###", with: five9Configuration.userEmail)
-//            .replacingOccurrences(of: "###CONFIGID###", with: five9Configuration.configID)
-//            .replacingOccurrences(of: "###APPID###", with: five9Configuration.appId)
-//            .replacingOccurrences(of: "###openChat###", with: WKScriptEvent.openChat.rawValue)
-//            .replacingOccurrences(of: "###closeChat###", with: WKScriptEvent.closeChat.rawValue)
-//            .replacingOccurrences(of: "###NAME###", with: five9Configuration.userName)
-    }
-    
     // MARK: Xpert
     public var xpertHTML: String {
         """
@@ -119,7 +48,6 @@ public class XpertFive9ChatViewModel: ObservableObject {
                             conversationScreen: {
                                 liveChat: {
                                     options: {
-                                        appId: '###APPID###',
                                         allowPopout: false
                                     },
                                 },
@@ -167,7 +95,6 @@ public class XpertFive9ChatViewModel: ObservableObject {
         """
             .replacingOccurrences(of: "###XPERT_KEY###", with: xpertConfiguration.xpertKey)
             .replacingOccurrences(of: "###USE_CASE###", with: xpertConfiguration.useCase)
-            .replacingOccurrences(of: "###APPID###", with: five9Configuration.appId)
             .replacingOccurrences(of: "###SEGMENTKEY###", with: xpertConfiguration.segmentKey)
             .replacingOccurrences(of: "###closeChat###", with: WKScriptEvent.closeChat.rawValue)
     }
