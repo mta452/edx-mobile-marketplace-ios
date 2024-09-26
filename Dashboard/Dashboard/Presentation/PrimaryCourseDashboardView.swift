@@ -328,6 +328,20 @@ public struct PrimaryCourseDashboardView<ProgramView: View>: View {
                             .foregroundColor(Theme.Colors.textPrimary)
                             .accessibilityIdentifier("courses_header_text")
                         Spacer()
+                        // MARK: - Chat Icon
+                        if viewModel.showChatIcon {
+                            HStack(alignment: .bottom) {
+                                Spacer()
+                                Button {
+                                    router.showLiveChat(animated: true)
+                                } label: {
+                                    CoreAssets.chatIcon.swiftUIImage
+                                        .resizable()
+                                        .frame(width: 35, height: 35)
+                                }
+                            }
+                            .padding(.top, 15)
+                        }
                     }
                     if showDropdown {
                         HStack(alignment: .center) {

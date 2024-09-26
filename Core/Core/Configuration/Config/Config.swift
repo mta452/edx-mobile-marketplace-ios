@@ -202,6 +202,9 @@ public class ConfigMock: Config {
         ],
         "APPLE_SIGNIN": [
             "ENABLED": true
+        ],
+        "XPERT_FIVE9": [
+            "ENABLED": true
         ]
     ]
     

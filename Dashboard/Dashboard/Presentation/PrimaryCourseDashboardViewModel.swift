@@ -81,6 +81,10 @@ public class PrimaryCourseDashboardViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
+    public var showChatIcon: Bool {
+        config.liveChat.enabled
+    }
+    
     @MainActor
     private func updateEnrollmentsIfNeeded() {
         guard updateNeeded else { return }
