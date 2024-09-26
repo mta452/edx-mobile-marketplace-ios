@@ -18,4 +18,27 @@ public struct XpertChatConfiguration {
         self.useCase = useCase
         self.segmentKey = segmentKey
     }
+    
+    var useCaseString: String {
+        if useCase.isEmpty {
+            return ""
+        } else {
+            var returnString = """
+            chatApi: {
+                payloadParams: {
+                    use_case: ###USE_CASE###,
+            """
+            if useCase.starts(with: "[") {
+                returnString.append(useCase)
+            } else {
+                returnString.append("'\(useCase)'")
+            }
+            returnString.append("""
+                },
+            },
+            """
+            )
+            return returnString
+        }
+    }
 }
