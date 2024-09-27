@@ -73,6 +73,7 @@ public class XpertFive9ChatViewModel: ObservableObject {
                                 var button = container.getElementsByTagName("button")[0];
                                 if (button != undefined && button.isClicked == undefined) {
                                     setTimeout(() => {
+                                        window.webkit.messageHandlers.###openedChat###.postMessage("###openedChat###");
                                         button.click();
                                     }, 500);
                                     button.isClicked = true;
@@ -97,6 +98,16 @@ public class XpertFive9ChatViewModel: ObservableObject {
                                 launchMessage.style["display"] = 'none';
                             }
                             Five9ChatSetOption("callback", f9CallbackFunc);
+                            var five9OpenButton = document.getElementsByClassName("xpert-chatbot-popup__live-chat--btn-outline")[0];
+                            if (five9OpenButton != undefined) {
+                                five9OpenButton.addEventListener(
+                                    "click",
+                                    function(e) {
+                                        window.webkit.messageHandlers.###clickedFive9###.postMessage("###clickedFive9###");
+                                    },
+                                    false
+                                );
+                            }
                         },
                         false
                     );
@@ -108,6 +119,8 @@ public class XpertFive9ChatViewModel: ObservableObject {
             .replacingOccurrences(of: "###USE_CASE###", with: xpertConfiguration.useCaseString)
             .replacingOccurrences(of: "###SEGMENTKEY###", with: xpertConfiguration.segmentKey)
             .replacingOccurrences(of: "###closeChat###", with: WKScriptEvent.closeChat.rawValue)
+            .replacingOccurrences(of: "###openedChat###", with: WKScriptEvent.openedChat.rawValue)
+            .replacingOccurrences(of: "###clickedFive9###", with: WKScriptEvent.clickedFive9.rawValue)
     }
     // swiftlint:enable line_length
     
