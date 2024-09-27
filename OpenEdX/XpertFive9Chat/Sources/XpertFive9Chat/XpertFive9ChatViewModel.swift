@@ -54,6 +54,17 @@ public class XpertFive9ChatViewModel: ObservableObject {
                 <script type="module" src="https://chatbot-frontend.prod.ai.2u.com/@latest/index.min.js"></script>
                 <script type="text/javascript" async="" src="https://cdn.segment.com/analytics.js/v1/###SEGMENTKEY###/analytics.min.js"></script>
                 <script>
+                    function f9CallbackFunc(event) {
+                        try {
+                            switch (event.type) {
+                            case 'endChatConfirmed':
+                                window.webkit.messageHandlers.###closeChat###.postMessage("###closeChat###");
+                                break;
+                            default:
+                                break;
+                        }
+                        } catch (exception) {}
+                    }
                     document.addEventListener(
                         "DOMSubtreeModified",
                         function(e) {
@@ -77,6 +88,15 @@ public class XpertFive9ChatViewModel: ObservableObject {
                                     false
                                 );
                             }
+                            var floatingButton = document.getElementById("xpert_chatbot__floating-action-btn");
+                            if (floatingButton != undefined) {
+                                floatingButton.style["display"] = 'none';
+                            }
+                            var launchMessage = document.getElementsByClassName("xpert_chatbot__launch-button-message")[0];
+                            if (launchMessage != undefined) {
+                                launchMessage.style["display"] = 'none';
+                            }
+                            Five9ChatSetOption("callback", f9CallbackFunc);
                         },
                         false
                     );

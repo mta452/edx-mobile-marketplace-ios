@@ -33,6 +33,10 @@ struct XpertFive9HTMLWebViewRepresentable: UIViewRepresentable {
         webView.navigationDelegate = context.coordinator
         webView.uiDelegate = context.coordinator
         webView.backgroundColor = .clear
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            webView.scrollView.backgroundColor = .clear
+            webView.isOpaque = false
+        }
 
         #if DEBUG
         if #available(iOS 16.4, *) {

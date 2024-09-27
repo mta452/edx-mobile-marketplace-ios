@@ -26,7 +26,7 @@ public struct XpertChatConfiguration {
             var returnString = """
             chatApi: {
                 payloadParams: {
-                    use_case: ###USE_CASE###,
+                    use_case: 
             """
             if useCase.starts(with: "[") {
                 returnString.append(useCase)
