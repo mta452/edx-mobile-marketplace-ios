@@ -23,7 +23,13 @@ struct XpertFive9HTMLWebViewRepresentable: UIViewRepresentable {
     @Binding var openedChat: Bool
     @Binding var clickedFive9: Bool
     
-    init(html: String?, baseURL: URL?, closeChat: Binding<Bool>, openedChat: Binding<Bool>, clickedFive9: Binding<Bool>) {
+    init(
+        html: String?,
+        baseURL: URL?,
+        closeChat: Binding<Bool>,
+        openedChat: Binding<Bool>,
+        clickedFive9: Binding<Bool>
+    ) {
         self.html = html
         self.baseURL = baseURL
         self._closeChat = closeChat
@@ -76,7 +82,11 @@ struct XpertFive9HTMLWebViewRepresentable: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        let coordinator: Coordinator = Coordinator(closeChat: $closeChat, openedChat: $openedChat, clickedFive9: $clickedFive9)
+        let coordinator: Coordinator = Coordinator(
+            closeChat: $closeChat,
+            openedChat: $openedChat,
+            clickedFive9: $clickedFive9
+        )
         return coordinator
     }
     
