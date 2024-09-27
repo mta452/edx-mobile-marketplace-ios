@@ -82,7 +82,7 @@ public class PrimaryCourseDashboardViewModel: ObservableObject {
     }
     
     public var showChatIcon: Bool {
-        config.liveChat.enabled
+        config.liveChat.enabled && connectivity.isInternetAvaliable
     }
     
     @MainActor

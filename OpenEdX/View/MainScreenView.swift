@@ -150,23 +150,14 @@ struct MainScreenView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing, content: {
                 if viewModel.selection == .profile {
-//                    Button(action: {
-//                        let router = Container.shared.resolve(ProfileRouter.self)!
-//                        router.showSettings()
-//                    }, label: {
-//                        CoreAssets.settings.swiftUIImage.renderingMode(.template)
-//                            .foregroundColor(Theme.Colors.accentColor)
-//                    })
-//                    .accessibilityIdentifier("edit_profile_button")
-//                } else {
                     Button(action: {
-                        let router = Container.shared.resolve(DashboardRouter.self)!
-                        router.showLiveChat(animated: true)
+                        let router = Container.shared.resolve(ProfileRouter.self)!
+                        router.showSettings()
                     }, label: {
-                        Image(systemName: "exclamationmark.bubble")
+                        CoreAssets.settings.swiftUIImage.renderingMode(.template)
                             .foregroundColor(Theme.Colors.accentColor)
                     })
-                    .accessibilityIdentifier("live_chat_button")
+                    .accessibilityIdentifier("edit_profile_button")
                 }
             })
         }
