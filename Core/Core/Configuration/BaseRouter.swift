@@ -87,6 +87,7 @@ public protocol BaseRouter {
     @MainActor
     func hideRestoreProgressView()
     
+    @MainActor
     func showLiveChat(animated: Bool)
 }
 
@@ -182,6 +183,7 @@ open class BaseRouterMock: BaseRouter {
     @MainActor
     public func hideRestoreProgressView() {}
 
+    @MainActor
     public func showLiveChat(animated: Bool) {}
 }
 #endif
