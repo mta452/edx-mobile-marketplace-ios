@@ -70,7 +70,6 @@ struct XpertFive9HTMLWebViewRepresentable: UIViewRepresentable {
     }
     
     func updateUIView(_ webView: WKWebView, context: Context) {
-//        context.coordinator.wkWebview = webView
         if let html = html, html != context.coordinator.previousHTML {
             webView.loadHTMLString(html, baseURL: baseURL)
             context.coordinator.previousHTML = html
@@ -116,7 +115,6 @@ extension XpertFive9HTMLWebViewRepresentable {
             self._openedChat = openedChat
             self._clickedFive9 = clickedFive9
         }
-//        weak var wkWebview: WKWebView?
         
         func userContentController(
             _ userContentController: WKUserContentController,
