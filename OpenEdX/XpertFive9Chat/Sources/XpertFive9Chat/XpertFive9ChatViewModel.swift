@@ -43,6 +43,7 @@ public class XpertFive9ChatViewModel: ObservableObject {
                             ###USE_CASE###
                             conversationScreen: {
                                 liveChat: {
+                                    enabled: \(xpertConfiguration.five9Enabled ? "true" : "false"),
                                     options: {
                                         allowPopout: false
                                     },
