@@ -252,9 +252,6 @@ public class DownloadManager: DownloadManagerProtocol {
             totalSize += block.encodedVideo?.video(downloadQuality: downloadQuality)?.fileSize ?? 0
         }
         return totalSize / (1024 * 1024 * 1024) > 1
-//        (blocks.reduce(0) {
-//            $0 + Double($1.encodedVideo?.video(downloadQuality: downloadQuality)?.fileSize ?? 0)
-//        } / 1024 / 1024 / 1024) > 1
     }
 
     public func getDownloadTasks() async -> [DownloadDataTask] {
