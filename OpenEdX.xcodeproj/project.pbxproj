@@ -1355,7 +1355,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rnr/XpertFive9Chat";
 			requirement = {
-				branch = main;
+				branch = "UI-fixes";
 				kind = branch;
 			};
 		};
