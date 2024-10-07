@@ -798,6 +798,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenEdX/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "We would like to utilize your calendar list to subscribe you to your personalized calendar for this course.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Allow access to your camera so you can share your photos and videos in the live chat.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Allow access to your photo library so you can save photos in your gallery.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
@@ -887,6 +890,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenEdX/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "We would like to utilize your calendar list to subscribe you to your personalized calendar for this course.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Allow access to your camera so you can share your photos and videos in the live chat.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Allow access to your photo library so you can save photos in your gallery.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
@@ -983,6 +989,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenEdX/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "We would like to utilize your calendar list to subscribe you to your personalized calendar for this course.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Allow access to your camera so you can share your photos and videos in the live chat.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Allow access to your photo library so you can save photos in your gallery.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
@@ -1072,6 +1081,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenEdX/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "We would like to utilize your calendar list to subscribe you to your personalized calendar for this course.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Allow access to your camera so you can share your photos and videos in the live chat.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Allow access to your photo library so you can save photos in your gallery.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
@@ -1222,6 +1234,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenEdX/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "We would like to utilize your calendar list to subscribe you to your personalized calendar for this course.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Allow access to your camera so you can share your photos and videos in the live chat.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Allow access to your photo library so you can save photos in your gallery.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
@@ -1257,6 +1272,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenEdX/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "We would like to utilize your calendar list to subscribe you to your personalized calendar for this course.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Allow access to your camera so you can share your photos and videos in the live chat.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Allow access to your photo library so you can save photos in your gallery.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
