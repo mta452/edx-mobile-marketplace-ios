@@ -915,7 +915,8 @@ extension Router {
             let xpertConfig = XpertChatConfiguration(
                 xpertKey: config.liveChat.xpertKey,
                 useCase: config.liveChat.useCase,
-                segmentKey: config.liveChat.segmentKey
+                segmentKey: config.liveChat.segmentKey,
+                baseURL: config.baseURL
             )
             XpertFive9Chat.show(
                 xpertConfig: xpertConfig,
