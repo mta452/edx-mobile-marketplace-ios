@@ -142,7 +142,7 @@ public struct PrimaryCardView: View {
     }
     
     private var assignments: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 0) {
             // pastAssignments
             if pastAssignments.count == 1, let pastAssignment = pastAssignments.first {
                 courseButton(
@@ -207,6 +207,7 @@ public struct PrimaryCardView: View {
                     description: nil,
                     icon: CoreAssets.trophy.swiftUIImage,
                     selected: false,
+                    bgColor: Theme.Colors.primaryCardUpgradeBG,
                     action: upgradeAction
                 )
             }
@@ -218,6 +219,7 @@ public struct PrimaryCardView: View {
                     description: DashboardLocalization.Learn.PrimaryCard.resume,
                     icon: CoreAssets.resumeCourse.swiftUIImage,
                     selected: true,
+                    bgColor: Theme.Colors.accentButtonColor,
                     action: { resumeAction() }
                 )
             } else {
@@ -226,6 +228,7 @@ public struct PrimaryCardView: View {
                     description: nil,
                     icon: CoreAssets.resumeCourse.swiftUIImage,
                     selected: true,
+                    bgColor: Theme.Colors.accentButtonColor,
                     action: { resumeAction() }
                 )
             }
@@ -237,6 +240,7 @@ public struct PrimaryCardView: View {
         description: String?,
         icon: Image,
         selected: Bool,
+        bgColor: Color = Theme.Colors.primaryCardCautionBG,
         action: @escaping () -> Void
     ) -> some View {
         Button(action: {
@@ -272,6 +276,7 @@ public struct PrimaryCardView: View {
                             .padding(.top, 2)
                         }
                     }
+                    .padding(.bottom, 8)
                     Spacer()
                     CoreAssets.chevronRight.swiftUIImage
                         .foregroundStyle(foregroundColor(selected))
@@ -279,7 +284,7 @@ public struct PrimaryCardView: View {
                 }
                 .padding(.top, 8)
                 .padding(.bottom, selected ? 10 : 0)
-            }.background(selected ? Theme.Colors.accentButtonColor : .clear)
+            }.background(bgColor)
         })
     }
     
