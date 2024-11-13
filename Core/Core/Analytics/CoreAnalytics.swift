@@ -295,6 +295,11 @@ public enum AnalyticsEvent: String {
     case bulkDownloadVideosSection = "Video:Bulk Download Section"
     case bulkDeleteVideosSubsection = "Videos:Delete Subsection Videos"
     case bulkDeleteVideosSection = "Videos:Delete Section Videos"
+    case videoLoaded = "Video:Loaded"
+    case videoSpeedChange = "Video:Change Speed"
+    case videoPlayed = "Video:Played"
+    case videoPaused = "Video:Paused"
+    case videoCompleted = "Video:Completed"
     case discussionAllPostsClicked = "Discussion:All Posts Clicked"
     case discussionFollowingClicked = "Discussion:Following Posts Clicked"
     case discussionTopicClicked = "Discussion:Topic Clicked"
@@ -320,6 +325,13 @@ public enum AnalyticsEvent: String {
     case logistrationRegister = "Logistration:Register"
     case profileEdit = "Profile:Edit Profile"
     case profilehelpUsImprove = "Profile:Feedback Form Clicked"
+    case discussionPostCreated = "Discussion:Post Created"
+    case discussionResponseAdded = "Discussion:Response Added"
+    case discussionCommentAdded = "Discussion:Comment Added"
+    case discussionFollowToggle = "Dicussion:Post Follow Toggle"
+    case discussionLikeToggle = "Discussion:Like Toggle"
+    case discussionReportToggle = "Discussion:Report Toggle"
+    
 }
 
 public enum EventBIValue: String {
@@ -371,6 +383,11 @@ public enum EventBIValue: String {
     case bulkDeleteVideosSubsection = "edx.bi.app.video.delete.subsection"
     case bulkDownloadVideosSection = "edx.bi.video.section.bulkdownload"
     case bulkDeleteVideosSection = "edx.bi.app.video.delete.section"
+    case videoLoaded = "edx.bi.app.videos.loaded"
+    case videoSpeedChange = "edx.bi.app.videos.speed.changed"
+    case videoPlayed = "edx.bi.app.videos.played"
+    case videoPaused = "edx.bi.app.videos.paused"
+    case videoCompleted = "edx.bi.app.videos.completed"
     case dashboardCourseClicked = "edx.bi.app.course.dashboard"
     case courseOutlineVideosTabClicked = "edx.bi.app.course.video_tab"
     case courseOutlineDatesTabClicked = "edx.bi.app.course.dates_tab"
@@ -420,6 +437,12 @@ public enum EventBIValue: String {
     case logistrationRegister = "edx.bi.app.logistration.register"
     case profileEdit = "edx.bi.app.profile.edit"
     case profilehelpUsImprove = "edx.bi.app.profile.feedback_form.clicked"
+    case discussionPostCreated = "edx.bi.app.discussion.post_created"
+    case discussionResponseAdded = "edx.bi.app.discussion.response_added"
+    case discussionCommentAdded = "edx.bi.app.discussion.comment_added"
+    case discussionFollowToggle = "edx.bi.app.discussion.follow_toggle"
+    case discussionLikeToggle = "edx.bi.app.discussion.like_toggle"
+    case discussionReportToggle = "edx.bi.app.discussion.report_toggle"
 }
 
 public struct EventParamKey {
@@ -463,6 +486,21 @@ public struct EventParamKey {
     public static let errorAction = "error_action"
     public static let flowType = "flow_type"
     public static let alertType = "alert_type"
+    public static let videoURL = "video_url"
+    public static let oldSpeed = "old_speed"
+    public static let newSpeed = "new_speed"
+    public static let currentTime = "current_time"
+    public static let duration = "duration"
+    public static let postType = "post_type"
+    public static let followPost = "follow_post"
+    public static let threadID = "thread_id"
+    public static let responseID = "response_id"
+    public static let commentID = "comment_id"
+    public static let author = "author"
+    public static let follow = "follow"
+    public static let like = "like"
+    public static let report = "report"
+    public static let discussionType = "discussion_type"
 }
 
 public struct EventCategory {
