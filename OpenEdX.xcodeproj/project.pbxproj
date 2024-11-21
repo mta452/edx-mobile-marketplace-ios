@@ -54,6 +54,7 @@
 		A50066932B614DCD0024680B /* FCMListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50066922B614DCD0024680B /* FCMListener.swift */; };
 		A50066952B614DEF0024680B /* BrazeListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50066942B614DEF0024680B /* BrazeListener.swift */; };
 		A5462D9C2B864AE0003B96A5 /* BranchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5462D9B2B864AE0003B96A5 /* BranchService.swift */; };
+		A5935EA72CEF857E00B4BB48 /* OEXSegementAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A5935EA62CEF857E00B4BB48 /* OEXSegementAnalytics */; };
 		A59568952B61630500ED4F90 /* DeepLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59568942B61630500ED4F90 /* DeepLinkManager.swift */; };
 		A59568972B61653700ED4F90 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59568962B61653700ED4F90 /* DeepLink.swift */; };
 		A59568992B616D9400ED4F90 /* PushLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59568982B616D9400ED4F90 /* PushLink.swift */; };
@@ -140,6 +141,7 @@
 		A50066922B614DCD0024680B /* FCMListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCMListener.swift; sourceTree = "<group>"; };
 		A50066942B614DEF0024680B /* BrazeListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrazeListener.swift; sourceTree = "<group>"; };
 		A5462D9B2B864AE0003B96A5 /* BranchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchService.swift; sourceTree = "<group>"; };
+		A5935EA32CEF7D3D00B4BB48 /* OEXSegementAnalytics */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = OEXSegementAnalytics; sourceTree = "<group>"; };
 		A59568942B61630500ED4F90 /* DeepLinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkManager.swift; sourceTree = "<group>"; };
 		A59568962B61653700ED4F90 /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
 		A59568982B616D9400ED4F90 /* PushLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushLink.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				07A7D78F28F5C9060000BE81 /* Core.framework in Frameworks */,
 				028A37362ADFF404008CA604 /* WhatsNew.framework in Frameworks */,
 				CE9C07D82CD104E5009C44D1 /* OEXFoundation in Frameworks */,
+				A5935EA72CEF857E00B4BB48 /* OEXSegementAnalytics in Frameworks */,
 				CE0BF0BA2CD9203A00D10289 /* MSAL in Frameworks */,
 				025DE1A428DB4DAE0053E0F4 /* Profile.framework in Frameworks */,
 				0770DE4B28D0A462006D8A5D /* Authorization.framework in Frameworks */,
@@ -223,6 +226,7 @@
 		07D5DA2828D075AA00752FD9 = {
 			isa = PBXGroup;
 			children = (
+				A5935EA32CEF7D3D00B4BB48 /* OEXSegementAnalytics */,
 				07D5DA3328D075AA00752FD9 /* OpenEdX */,
 				07D5DA3228D075AA00752FD9 /* Products */,
 				55A895025FB07897BA68E063 /* Pods */,
@@ -403,6 +407,7 @@
 				CE5712782CD1099B00D4AB17 /* OEXFirebaseAnalytics */,
 				CE924BE62CD8FAB3000137CA /* FirebaseMessaging */,
 				CE0BF0B92CD9203A00D10289 /* MSAL */,
+				A5935EA62CEF857E00B4BB48 /* OEXSegementAnalytics */,
 			);
 			productName = OpenEdX;
 			productReference = 07D5DA3128D075AA00752FD9 /* OpenEdX.app */;
@@ -1263,6 +1268,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A5935EA62CEF857E00B4BB48 /* OEXSegementAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OEXSegementAnalytics;
+		};
 		CE0BF0B92CD9203A00D10289 /* MSAL */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CE0BF0B82CD9203A00D10289 /* XCRemoteSwiftPackageReference "microsoft-authentication-library-for-objc" */;

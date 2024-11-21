@@ -34,6 +34,7 @@ public protocol ConfigProtocol {
     var branch: BranchConfig { get }
     var program: DiscoveryConfig { get }
     var URIScheme: String { get }
+    var segment: SegmentConfig { get }
 }
 
 public enum TokenType: String {

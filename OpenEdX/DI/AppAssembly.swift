@@ -18,6 +18,7 @@ import Discussion
 import Authorization
 import Profile
 import WhatsNew
+import OEXSegementAnalytics
 
 // swiftlint:disable function_body_length
 class AppAssembly: Assembly {
@@ -216,6 +217,16 @@ class AppAssembly: Assembly {
         
         container.register(FirebaseAnalyticsService.self) { _ in
             FirebaseAnalyticsService()
+        }.inObjectScope(.container)
+        
+        container.register(SegmentAnalyticsService.self) { r in
+            let config = r.resolve(ConfigProtocol.self)!
+            let writeKey = config.segment.writeKey
+            let firebaseAnalyticSourceIsSegment = config.firebase.enabled && config.firebase.isAnalyticsSourceSegment
+            return SegmentAnalyticsService(
+                writeKey: writeKey,
+                firebaseAnalyticSourceIsSegment: firebaseAnalyticSourceIsSegment
+            )
         }.inObjectScope(.container)
         
         container.register(PipManagerProtocol.self) { r in

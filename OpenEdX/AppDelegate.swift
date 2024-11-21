@@ -19,6 +19,7 @@ import FirebaseCore
 import FirebaseMessaging
 import Theme
 import BackgroundTasks
+import OEXSegementAnalytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -141,6 +142,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Initialize your plugins here
+        if config.segment.enabled {
+            pluginManager.addPlugin(
+                analyticsService: SegmentAnalyticsService(
+                    writeKey: config.segment.writeKey,
+                    firebaseAnalyticSourceIsSegment:
+                        config.firebase.enabled && config.firebase.isAnalyticsSourceSegment
+                )
+            )
+        }
     }
 
     private func initDI() {
