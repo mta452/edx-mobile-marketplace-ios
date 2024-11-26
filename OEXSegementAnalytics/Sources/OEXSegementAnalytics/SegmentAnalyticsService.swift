@@ -11,7 +11,7 @@ import Segment
 import SegmentFirebase
 
 public class SegmentAnalyticsService: AnalyticsService {
-    var analytics: Analytics?
+    public var analytics: Analytics?
     
     // Init manager
     public init(writeKey: String, firebaseAnalyticSourceIsSegment: Bool) {

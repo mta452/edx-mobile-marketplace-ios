@@ -175,7 +175,7 @@ class AppAssembly: Assembly {
             r.resolve(AppStorage.self)!
         }.inObjectScope(.container)
         
-        container.register(SSOHelper.self){ r in
+        container.register(SSOHelper.self) { r in
             SSOHelper(
                 keychain: r.resolve(KeychainSwift.self)!
             )
@@ -187,10 +187,8 @@ class AppAssembly: Assembly {
         
         container.register(PushNotificationsManager.self) { r in
             PushNotificationsManager(
-                deepLinkManager: r.resolve(DeepLinkManager.self)!,
-                storage: r.resolve(CoreStorage.self)!,
-                api: r.resolve(API.self)!,
-                config: r.resolve(ConfigProtocol.self)!
+                providers: r.resolve(PluginManager.self)!.pushNotificationsProviders,
+                listeners: r.resolve(PluginManager.self)!.pushNotificationsListeners
             )
         }.inObjectScope(.container)
         
