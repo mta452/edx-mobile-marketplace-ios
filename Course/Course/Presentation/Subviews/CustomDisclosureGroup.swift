@@ -127,7 +127,8 @@ struct CustomDisclosureGroup: View {
                                                 VStack(alignment: .leading) {
                                                     HStack {
                                                         if sequential.completion == 1 {
-                                                            CoreAssets.finishedSequence.swiftUIImage.renderingMode(.template)
+                                                            CoreAssets.finishedSequence.swiftUIImage
+                                                                .renderingMode(.template)
                                                                 .resizable()
                                                                 .foregroundColor(Theme.Colors.success)
                                                                 .frame(width: 20, height: 20)
@@ -145,13 +146,10 @@ struct CustomDisclosureGroup: View {
                                                                 alignment: .leading
                                                             )
                                                     }
-                                                    if let sequentialProgress = sequential.sequentialProgress,
-                                                       let assignmentType = sequentialProgress.assignmentType,
-                                                       let numPointsEarned = sequentialProgress.numPointsEarned,
-                                                       let numPointsPossible = sequentialProgress.numPointsPossible,
-                                                       let due = sequential.due {
-                                                        let daysRemaining = getAssignmentStatus(for: due)
-                                                        Text("\(assignmentType) - \(daysRemaining) - \(numPointsEarned) / \(numPointsPossible)")
+                                                    if let assignmentStatusText = assignmentStatusText(
+                                                        sequential: sequential
+                                                    ) {
+                                                        Text(assignmentStatusText)
                                                             .font(Theme.Fonts.bodySmall)
                                                             .multilineTextAlignment(.leading)
                                                             .lineLimit(2)
@@ -218,12 +216,34 @@ struct CustomDisclosureGroup: View {
         }
     }
     
-    private func canDownloadAllSections(in chapter: CourseChapter) -> Bool {
-        for sequential in chapter.childs {
-            if let state = viewModel.sequentialsDownloadState[sequential.id] {
-                return true
-            }
+    private func assignmentStatusText(
+        sequential: CourseSequential
+    ) -> String? {
+        
+        guard let sequentialProgress = sequential.sequentialProgress,
+              let assignmentType = sequentialProgress.assignmentType,
+              let numPointsEarned = sequentialProgress.numPointsEarned,
+              let numPointsPossible = sequentialProgress.numPointsPossible,
+              let due = sequential.due else {
+            return nil
         }
+        
+        let daysRemaining = getAssignmentStatus(for: due)
+        
+        if let courseVertical = sequential.childs.first,
+           courseVertical.childs.isEmpty {
+            return "\(assignmentType) - \(daysRemaining)"
+        }
+        
+        return "\(assignmentType) - \(daysRemaining) - \(numPointsEarned) / \(numPointsPossible)"
+        
+    }
+    
+    private func canDownloadAllSections(in chapter: CourseChapter) -> Bool {
+        for sequential in chapter.childs where viewModel.sequentialsDownloadState[sequential.id] != nil {
+            return true
+        }
+        
         return false
     }
     
@@ -383,7 +403,7 @@ struct CustomDisclosureGroup_Previews: PreviewProvider {
             courseStart: Date(),
             courseEnd: nil,
             enrollmentStart: Date(),
-            enrollmentEnd: nil, 
+            enrollmentEnd: nil,
             lastVisitedBlockID: nil,
             coreAnalytics: CoreAnalyticsMock(),
             serverConfig: ServerConfigProtocolMock()
