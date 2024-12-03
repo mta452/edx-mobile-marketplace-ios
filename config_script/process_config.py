@@ -144,7 +144,7 @@ class ConfigurationManager:
             body['CFBundleURLName'] = bundle_identifier
             
         existing = plist.get('CFBundleURLTypes', [])
-        found = any(scheme in entry.get('CFBundleURLSchemes', []) for entry in existing)
+        found = any(scheme == entry.get('CFBundleURLSchemes', []) for entry in existing)
         
         if not found:
             existing.append(body)
