@@ -145,7 +145,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialize your plugins here
         // - Segment analytic
         if config.segment.enabled {
-            let firebaseAnalyticSourceIsSegment = config.firebase.enabled && config.firebase.isAnalyticsSourceSegment
             pluginManager.addPlugin(analyticsService: Container.shared.resolve(SegmentAnalyticsService.self)!)
         }
         // - Braze
