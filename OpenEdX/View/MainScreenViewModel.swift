@@ -10,6 +10,7 @@ import Core
 import Profile
 import Combine
 import Authorization
+import UserNotifications
 
 final class MainScreenViewModel: ObservableObject {
 
@@ -35,6 +36,19 @@ final class MainScreenViewModel: ObservableObject {
         self.profileInteractor = profileInteractor
         self.sourceScreen = sourceScreen
         addObservers()
+        trackSettingPermissionStatus()
+    }
+    
+    private func trackSettingPermissionStatus() {
+        UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { [weak self] (settings) in
+            if settings.authorizationStatus == .notDetermined {
+                self?.analytics.notificationPermissionStatus(status: "not_determined")
+            } else if settings.authorizationStatus == .denied {
+                self?.analytics.notificationPermissionStatus(status: "denied")
+            } else if settings.authorizationStatus == .authorized {
+                self?.analytics.notificationPermissionStatus(status: "authorized")
+            }
+        })
     }
     
     private func addObservers() {
