@@ -19,6 +19,7 @@ import FirebaseCore
 import FirebaseMessaging
 import Theme
 import BackgroundTasks
+import EDXFullstory
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -141,6 +142,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Initialize your plugins here
+        // - Fullstory
+        if config.fullStory.enabled {
+            pluginManager.addPlugin(analyticsService: Container.shared.resolve(FullStoryAnalyticsService.self)!)
+        }
     }
 
     private func initDI() {

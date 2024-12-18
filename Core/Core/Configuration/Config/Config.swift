@@ -34,6 +34,7 @@ public protocol ConfigProtocol: Sendable {
     var branch: BranchConfig { get }
     var program: DiscoveryConfig { get }
     var URIScheme: String { get }
+    var fullStory: FullStoryConfig { get }
 }
 
 public enum TokenType: String, Sendable {

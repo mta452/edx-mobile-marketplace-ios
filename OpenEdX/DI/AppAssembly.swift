@@ -17,6 +17,7 @@ import Discussion
 import Authorization
 import Profile
 import WhatsNew
+import EDXFullstory
 
 // swiftlint:disable function_body_length
 class AppAssembly: Assembly {
@@ -223,6 +224,10 @@ class AppAssembly: Assembly {
                 courseInteractor: r.resolve(CourseInteractorProtocol.self)!,
                 courseDropDownNavigationEnabled: config.uiComponents.courseDropDownNavigationEnabled
             )
+        }.inObjectScope(.container)
+        
+        container.register(FullStoryAnalyticsService.self) { r in
+            FullStoryAnalyticsService()
         }.inObjectScope(.container)
     }
 }
