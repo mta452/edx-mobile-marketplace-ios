@@ -19,8 +19,7 @@ import FirebaseCore
 import FirebaseMessaging
 import Theme
 import BackgroundTasks
-import OEXSegementAnalytics
-import OEXBrazeService
+import EDXMobileAnalytics
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
