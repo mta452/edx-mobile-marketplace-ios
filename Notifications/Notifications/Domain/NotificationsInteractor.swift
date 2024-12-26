@@ -10,7 +10,7 @@ import Core
 
 //sourcery: AutoMockable
 public protocol NotificationsInteractorProtocol {
-    
+    func getNotificationsCount() async throws -> NotificationsCount
 }
 
 public class NotificationsInteractor: NotificationsInteractorProtocol {
@@ -19,6 +19,10 @@ public class NotificationsInteractor: NotificationsInteractorProtocol {
     
     public init(repository: NotificationsRepositoryProtocol) {
         self.repository = repository
+    }
+    
+    public func getNotificationsCount() async throws -> NotificationsCount {
+        try await repository.getNotificationsCount()
     }
 }
 

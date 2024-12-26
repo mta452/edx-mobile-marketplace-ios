@@ -10,12 +10,20 @@ import Core
 import Alamofire
 
 enum NotificationsEndpoint: EndPointType {
+    case getNotificationsCount
+    
     var path: String {
-        return ""
+        switch self {
+        case .getNotificationsCount:
+            "/api/notifications/count"
+        }
     }
     
     var httpMethod: HTTPMethod {
-        return .get
+        switch self {
+        case .getNotificationsCount:
+            .get
+        }
     }
     
     var headers: HTTPHeaders? {
@@ -23,7 +31,9 @@ enum NotificationsEndpoint: EndPointType {
     }
     
     var task: HTTPTask {
-        let params: [String: Encodable] = [:]
-        return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+        switch self {
+        case .getNotificationsCount:
+                .request
+        }
     }
 }
