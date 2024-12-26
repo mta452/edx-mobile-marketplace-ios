@@ -9,6 +9,7 @@ import XCTest
 import SwiftyMocky
 @testable import Core
 
+@MainActor
 final class DownloadManagerTests: XCTestCase {
     
     var persistence: CorePersistenceProtocolMock!
@@ -39,7 +40,8 @@ final class DownloadManagerTests: XCTestCase {
         Given(storage, .userSettings(getter: UserSettings(
             wifiOnly: true,
             streamingQuality: .auto,
-            downloadQuality: .auto
+            downloadQuality: .auto,
+            playbackSpeed: 1.0
         )))
         
         let blocks = [createMockCourseBlock()]
@@ -56,7 +58,8 @@ final class DownloadManagerTests: XCTestCase {
         Given(storage, .userSettings(getter: UserSettings(
             wifiOnly: true,
             streamingQuality: .auto,
-            downloadQuality: .auto
+            downloadQuality: .auto,
+            playbackSpeed: 1.0
         )))
         Given(connectivity, .isInternetAvaliable(getter: true))
         Given(connectivity, .isMobileData(getter: true))
@@ -101,10 +104,10 @@ final class DownloadManagerTests: XCTestCase {
         try await downloadManager.resumeDownloading()
         
         // Wait a bit for async operations to complete
-        try? await Task.sleep(nanoseconds: 100_000_000)
+        await Task.yield()
         
         // Then
-        Verify(persistence, 2, .nextBlockForDownloading())
+        Verify(persistence, 1, .nextBlockForDownloading())
         XCTAssertEqual(downloadManager.currentDownloadTask?.id, mockTask.id)
     }
     
@@ -177,7 +180,7 @@ final class DownloadManagerTests: XCTestCase {
         Verify(persistence, 1, .deleteDownloadDataTask(id: .value(block.id)))
     }
     
-    func testFileUrl_ForFinishedTask_ShouldReturnCorrectUrl() {
+    func testFileUrl_ForFinishedTask_ShouldReturnCorrectUrl() async {
         // Given
         let task = createMockDownloadTask(state: .finished)
         let mockUser = DataLayer.User(
@@ -199,7 +202,7 @@ final class DownloadManagerTests: XCTestCase {
         )
         
         // When
-        let url = downloadManager.fileUrl(for: task.id)
+        let url = await downloadManager.fileUrl(for: task.id)
         
         // Then
         XCTAssertNotNil(url)

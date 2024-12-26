@@ -11,7 +11,7 @@ import Core
 import BranchSDK
 import OEXFoundation
 
-class BranchService: DeepLinkService {
+@preconcurrency final class BranchService: DeepLinkService {
     // configure service
     func configureWith(
         manager: DeepLinkManagerProtocol,

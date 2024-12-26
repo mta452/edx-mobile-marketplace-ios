@@ -10,6 +10,7 @@ import Core
 import OEXFoundation
 import Theme
 
+@MainActor
 public struct AllCoursesView: View {
     
     @ObservedObject
@@ -205,7 +206,7 @@ struct AllCoursesView_Previews: PreviewProvider {
         let vm = AllCoursesViewModel(
             interactor: DashboardInteractor.mock,
             connectivity: Connectivity(),
-            analytics: DashboardAnalyticsMock(), 
+            analytics: DashboardAnalyticsMock(),
             storage: CoreStorageMock()
         )
         

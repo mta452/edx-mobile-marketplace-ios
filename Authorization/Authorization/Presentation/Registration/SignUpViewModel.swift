@@ -14,7 +14,8 @@ import FacebookLogin
 import GoogleSignIn
 import MSAL
 
-public class SignUpViewModel: ObservableObject {
+@MainActor
+public final class SignUpViewModel: ObservableObject {
     
     @Published var isShowProgress = false
     @Published var scrollTo: Int?
@@ -194,7 +195,13 @@ public class SignUpViewModel: ObservableObject {
             analytics.userLogin(method: authMethod)
             isShowProgress = false
             router.showMainOrWhatsNewScreen(sourceScreen: sourceScreen)
-            NotificationCenter.default.post(name: .userAuthorized, object: nil)
+            NotificationCenter.default.post(
+                name: .userAuthorized,
+                object: [
+                    "authMethod": authMethod,
+                    "showSocialRegisterBanner": true
+                    ]
+            )
         } catch {
             update(fullName: response.name, email: response.email)
             self.externalToken = response.token

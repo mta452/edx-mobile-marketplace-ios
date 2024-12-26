@@ -13,6 +13,7 @@ import Alamofire
 import SwiftUI
 import Combine
 
+@MainActor
 final class CourseContainerViewModelTests: XCTestCase {
     
     func testGetCourseBlocksSuccess() async throws {
@@ -99,9 +100,13 @@ final class CourseContainerViewModelTests: XCTestCase {
             displayName: "",
             topicID: nil,
             childs: childs,
-            media: DataLayer.CourseMedia(image: DataLayer.Image(raw: "",
-                                                                small: "",
-                                                                large: "")),
+            media: CourseMedia(
+                image: CourseImage(
+                    raw: "",
+                    small: "",
+                    large: ""
+                )
+            ),
             certificate: nil,
             org: "",
             isSelfPaced: true,
@@ -168,9 +173,13 @@ final class CourseContainerViewModelTests: XCTestCase {
             displayName: "",
             topicID: nil,
             childs: [],
-            media: DataLayer.CourseMedia(image: DataLayer.Image(raw: "",
-                                                                small: "",
-                                                                large: "")),
+            media: CourseMedia(
+                image: CourseImage(
+                    raw: "",
+                    small: "",
+                    large: ""
+                )
+            ),
             certificate: nil,
             org: "",
             isSelfPaced: true,
@@ -430,11 +439,13 @@ final class CourseContainerViewModelTests: XCTestCase {
             displayName: "",
             topicID: nil,
             childs: [chapter],
-            media: DataLayer.CourseMedia(image: DataLayer.Image(
-                raw: "",
-                small: "",
-                large: ""
-            )),
+            media: CourseMedia(
+                image: CourseImage(
+                    raw: "",
+                    small: "",
+                    large: ""
+                )
+            ),
             certificate: nil,
             org: "",
             isSelfPaced: true,
@@ -492,12 +503,7 @@ final class CourseContainerViewModelTests: XCTestCase {
             sequentials: [sequential]
         )
 
-        let exp = expectation(description: "Task Starting")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            exp.fulfill()
-        }
-
-        wait(for: [exp], timeout: 1)
+        await Task.yield()
 
         XCTAssertEqual(viewModel.sequentialsDownloadState[blockId], .downloading)
     }
@@ -577,11 +583,13 @@ final class CourseContainerViewModelTests: XCTestCase {
             displayName: "",
             topicID: nil,
             childs: [chapter],
-            media: DataLayer.CourseMedia(image: DataLayer.Image(
-                raw: "",
-                small: "",
-                large: ""
-            )),
+            media: CourseMedia(
+                image: CourseImage(
+                    raw: "",
+                    small: "",
+                    large: ""
+                )
+            ),
             certificate: nil,
             org: "",
             isSelfPaced: true,
@@ -623,12 +631,7 @@ final class CourseContainerViewModelTests: XCTestCase {
             sequentials: [sequential]
         )
 
-        let exp = expectation(description: "Task Starting")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            exp.fulfill()
-        }
-
-        wait(for: [exp], timeout: 1)
+        await Task.yield()
 
         XCTAssertEqual(viewModel.sequentialsDownloadState[blockId], .available)
     }
@@ -707,11 +710,13 @@ final class CourseContainerViewModelTests: XCTestCase {
             displayName: "",
             topicID: nil,
             childs: [chapter],
-            media: DataLayer.CourseMedia(image: DataLayer.Image(
-                raw: "",
-                small: "",
-                large: ""
-            )),
+            media: CourseMedia(
+                image: CourseImage(
+                    raw: "",
+                    small: "",
+                    large: ""
+                )
+            ),
             certificate: nil,
             org: "",
             isSelfPaced: true,
@@ -753,12 +758,7 @@ final class CourseContainerViewModelTests: XCTestCase {
             sequentials: [sequential]
         )
 
-        let exp = expectation(description: "Task Starting")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            exp.fulfill()
-        }
-
-        wait(for: [exp], timeout: 1)
+        await Task.yield()
 
         XCTAssertEqual(viewModel.sequentialsDownloadState[blockId], .available)
 
@@ -838,11 +838,13 @@ final class CourseContainerViewModelTests: XCTestCase {
             displayName: "",
             topicID: nil,
             childs: [chapter],
-            media: DataLayer.CourseMedia(image: DataLayer.Image(
-                raw: "",
-                small: "",
-                large: ""
-            )),
+            media: CourseMedia(
+                image: CourseImage(
+                    raw: "",
+                    small: "",
+                    large: ""
+                )
+            ),
             certificate: nil,
             org: "",
             isSelfPaced: true,
@@ -878,12 +880,7 @@ final class CourseContainerViewModelTests: XCTestCase {
         viewModel.courseStructure = courseStructure
         await viewModel.setDownloadsStates(courseStructure: courseStructure)
 
-        let exp = expectation(description: "Task Starting")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            exp.fulfill()
-        }
-
-        wait(for: [exp], timeout: 1)
+        await Task.yield()
 
         XCTAssertEqual(viewModel.sequentialsDownloadState[sequential.id], .available)
     }
@@ -962,11 +959,9 @@ final class CourseContainerViewModelTests: XCTestCase {
             displayName: "",
             topicID: nil,
             childs: [chapter],
-            media: DataLayer.CourseMedia(image: DataLayer.Image(
-                raw: "",
-                small: "",
-                large: ""
-            )),
+            media: CourseMedia(image: CourseImage(raw: "",
+                                                  small: "",
+                                                  large: "")),
             certificate: nil,
             org: "",
             isSelfPaced: true,
@@ -1018,12 +1013,7 @@ final class CourseContainerViewModelTests: XCTestCase {
         viewModel.courseStructure = courseStructure
         await viewModel.setDownloadsStates(courseStructure: courseStructure)
 
-        let exp = expectation(description: "Task Starting")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            exp.fulfill()
-        }
-
-        wait(for: [exp], timeout: 1)
+        await Task.yield()
 
         XCTAssertEqual(viewModel.sequentialsDownloadState[sequential.id], .downloading)
     }
@@ -1102,11 +1092,9 @@ final class CourseContainerViewModelTests: XCTestCase {
             displayName: "",
             topicID: nil,
             childs: [chapter],
-            media: DataLayer.CourseMedia(image: DataLayer.Image(
-                raw: "",
-                small: "",
-                large: ""
-            )),
+            media: CourseMedia(image: CourseImage(raw: "",
+                                                  small: "",
+                                                  large: "")),
             certificate: nil,
             org: "",
             isSelfPaced: true,
@@ -1158,12 +1146,8 @@ final class CourseContainerViewModelTests: XCTestCase {
         viewModel.courseStructure = courseStructure
         await viewModel.setDownloadsStates(courseStructure: courseStructure)
 
-        let exp = expectation(description: "Task Starting")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            exp.fulfill()
-        }
-
-        wait(for: [exp], timeout: 1)
+        await Task.yield()
+        
         XCTAssertEqual(viewModel.sequentialsDownloadState[sequential.id], .finished)
     }
     
@@ -1264,11 +1248,13 @@ final class CourseContainerViewModelTests: XCTestCase {
             displayName: "",
             topicID: nil,
             childs: [chapter],
-            media: DataLayer.CourseMedia(image: DataLayer.Image(
-                raw: "",
-                small: "",
-                large: ""
-            )),
+            media: CourseMedia(
+                image: CourseImage(
+                    raw: "",
+                    small: "",
+                    large: ""
+                )
+            ),
             certificate: nil,
             org: "",
             isSelfPaced: true,
@@ -1320,12 +1306,7 @@ final class CourseContainerViewModelTests: XCTestCase {
         viewModel.courseStructure = courseStructure
         await viewModel.setDownloadsStates(courseStructure: courseStructure)
 
-        let exp = expectation(description: "Task Starting")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            exp.fulfill()
-        }
-
-        wait(for: [exp], timeout: 1)
+        await Task.yield()
 
         XCTAssertEqual(viewModel.sequentialsDownloadState[sequential.id], .available)
     }

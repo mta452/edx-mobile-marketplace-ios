@@ -19,7 +19,7 @@ import Profile
 import WhatsNew
 import Combine
 
-// swiftlint:disable file_length type_body_length
+// swiftlint:disable type_body_length file_length
 public class Router: AuthorizationRouter,
                      WhatsNewRouter,
                      DiscoveryRouter,
@@ -383,8 +383,13 @@ public class Router: AuthorizationRouter,
         )
         navigationController.pushViewController(controller, animated: true)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            Container.shared.resolve(PushNotificationsManager.self)?.performRegistration()
+        Task {
+            try? await Task.sleep(for: .seconds(1))
+            await Container.shared.resolve(PushNotificationsManager.self)?.performRegistration()
+        }
+        
+        if let analytics = Container.shared.resolve(DashboardAnalytics.self) {
+            analytics.dashboardCourseClicked(courseID: courseID, courseName: title)
         }
     }
     
@@ -506,7 +511,6 @@ public class Router: AuthorizationRouter,
         courseStructure: CourseStructure,
         blockLink: String) {
             var courseBlock: CourseBlock?
-            var courseName: String?
             var chapterPosition: Int?
             var sequentialPosition: Int?
             var verticalPosition: Int?
@@ -517,7 +521,6 @@ public class Router: AuthorizationRouter,
                         vertical.childs.forEach { block in
                             if block.id == componentID {
                                 courseBlock = block
-                                courseName = sequential.displayName
                                 chapterPosition = chapterIndex
                                 sequentialPosition = sequentialIndex
                                 verticalPosition = verticalIndex
@@ -538,7 +541,8 @@ public class Router: AuthorizationRouter,
                         verticalIndex: verticalPosition ?? 0,
                         chapters: courseStructure.childs,
                         chapterIndex: chapterPosition ?? 0,
-                        sequentialIndex: sequentialPosition ?? 0)
+                        sequentialIndex: sequentialPosition ?? 0
+                    )
                 }
             } else if !blockLink.isEmpty, let blockURL = URL(string: blockLink) {
                 DispatchQueue.main.async { [weak self] in
@@ -890,4 +894,4 @@ extension Router {
         navigationController.setViewControllers(viewControllers, animated: true)
     }
 }
-// swiftlint:enable file_length type_body_length
+// swiftlint:enable type_body_length file_length

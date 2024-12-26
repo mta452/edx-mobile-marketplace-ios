@@ -16,9 +16,8 @@ import Discussion
 import WhatsNew
 import Swinject
 import OEXFoundation
-import OEXFirebaseAnalytics
 
-// swiftlint:disable type_body_length file_length
+// swiftlint:disable type_body_length
 class AnalyticsManager: AuthorizationAnalytics,
                         MainScreenAnalytics,
                         DiscoveryAnalytics,
@@ -147,8 +146,8 @@ class AnalyticsManager: AuthorizationAnalytics,
         trackScreenEvent(.mainDiscoveryTabClicked, biValue: .mainDiscoveryTabClicked)
     }
     
-    public func mainDashboardTabClicked() {
-        trackEvent(.mainDashboardTabClicked, biValue: .mainDashboardTabClicked)
+    public func mainLearnTabClicked() {
+        trackScreenEvent(.mainDashboardLearnTabClicked, biValue: .mainDashboardLearnTabClicked)
     }
     
     public func mainProgramsTabClicked() {
@@ -157,6 +156,14 @@ class AnalyticsManager: AuthorizationAnalytics,
     
     public func mainProfileTabClicked() {
         trackScreenEvent(.mainProfileTabClicked, biValue: .mainProfileTabClicked)
+    }
+    
+    public func mainCoursesClicked() {
+        trackScreenEvent(.mainDashboardCoursesClicked, biValue: .mainDashboardCoursesClicked)
+    }
+    
+    public func mainProgramsClicked() {
+        trackScreenEvent(.mainDashboardProgramsClicked, biValue: .mainDashboardProgramsClicked)
     }
     
     // MARK: Discovery
@@ -311,7 +318,7 @@ class AnalyticsManager: AuthorizationAnalytics,
             EventParamKey.name: EventBIValue.cookiePolicyClicked.rawValue,
             EventParamKey.category: EventCategory.profile
         ]
-        logEvent(.cookiePolicyClicked)
+        logEvent(.cookiePolicyClicked, parameters: parameters)
     }
     
     public func emailSupportClicked() {
@@ -819,4 +826,4 @@ class AnalyticsManager: AuthorizationAnalytics,
         logEvent(.whatnewClose, parameters: parameters)
     }
 }
-// swiftlint:enable type_body_length file_length
+// swiftlint:enable type_body_length

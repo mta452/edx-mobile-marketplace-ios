@@ -14,8 +14,9 @@ import Course
 import Profile
 import OEXFoundation
 
-// swiftlint:disable function_body_length type_body_length
+// swiftlint:disable function_body_length
 //sourcery: AutoMockable
+@MainActor
 public protocol DeepLinkService {
     func configureWith(
         manager: DeepLinkManagerProtocol,
@@ -30,6 +31,7 @@ public protocol DeepLinkService {
     ) -> Bool
 }
 
+@MainActor
 public class DeepLinkManager: DeepLinkManagerProtocol {
     private var services: [DeepLinkService] = []
     private let config: ConfigProtocol
@@ -113,7 +115,7 @@ public class DeepLinkManager: DeepLinkManagerProtocol {
         
         Task {
             if isAppActive {
-                await showNotificationAlert(link)
+                showNotificationAlert(link)
             } else {
                 await navigateToScreen(with: link.type, link: link)
             }
@@ -130,8 +132,7 @@ public class DeepLinkManager: DeepLinkManagerProtocol {
             }
         }
     }
-    
-    @MainActor
+
     private func showNotificationAlert(_ link: PushLink) {
         router.dismissPresentedViewController()
         
@@ -495,4 +496,4 @@ extension DeepLinkError: LocalizedError {
         }
     }
 }
-// swiftlint:enable function_body_length type_body_length
+// swiftlint:enable function_body_length

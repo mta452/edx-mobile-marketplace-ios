@@ -11,6 +11,7 @@ import Core
 import Combine
 import Swinject
 
+@MainActor
 public class BaseResponsesViewModel {
     
     @Published public var postComments: Post?
@@ -136,8 +137,7 @@ public class BaseResponsesViewModel {
     }
     
     func addNewPost(_ post: Post) {
-        var newPostWithAvatar = post
-        postComments?.comments.append(newPostWithAvatar)
+        postComments?.comments.append(post)
         itemsCount += 1
     }
     
