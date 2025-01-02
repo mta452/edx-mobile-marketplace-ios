@@ -28,6 +28,8 @@ public struct SubtitlesView: View {
     @State var pause: Bool = false
     @State var languages: [SubtitleUrl]
     
+    @State private var autoScrollPublisher = PassthroughSubject<Void, Never>()
+    
     public init(languages: [SubtitleUrl],
                 currentTime: Binding<Double>,
                 viewModel: VideoPlayerViewModel,
@@ -79,13 +81,6 @@ public struct SubtitlesView: View {
                                             
                                             .onChange(of: currentTime, perform: { _ in
                                                 if subtitle.fromTo.contains(Date(milliseconds: currentTime)) {
-                                                    if id != subtitle.id {
-                                                        withAnimation {
-                                                            if !pause {
-                                                                scroll.scrollTo(subtitle.id, anchor: .top)
-                                                            }
-                                                        }
-                                                    }
                                                     self.id = subtitle.id
                                                 }
                                             })
@@ -93,11 +88,27 @@ public struct SubtitlesView: View {
                                     }.id(subtitle.id)
                                 }
                             }
+                            .onChange(of: id) { _ in
+                                withAnimation {
+                                    if !pause {
+                                        scroll.scrollTo(id, anchor: .top)
+                                    }
+                                }
+                            }
                         }
-                    }.simultaneousGesture(
+                    }
+                    .simultaneousGesture(
                         DragGesture().onChanged({ _ in
-                            pauseScrolling()
-                        }))
+                            pause = true
+                            autoScrollPublisher.send()
+                        })
+                    )
+                    .onReceive(autoScrollPublisher.debounce(for: .seconds(3), scheduler: DispatchQueue.main)) { _ in
+                        if pause {
+                            refreshID()
+                            pause = false
+                        }
+                    }
                 }
             }.padding(.horizontal, 24)
                 .padding(.top, 16)
@@ -105,11 +116,15 @@ public struct SubtitlesView: View {
         }
     }
     
-    private func pauseScrolling() {
-        pause = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.pause = false
+    private func refreshID() {
+        if let subtitle = subtitle(at: currentTime) {
+            id = subtitle.id
         }
+    }
+    
+    private func subtitle(at time: Double) -> Subtitle? {
+        let date = Date(milliseconds: time)
+        return viewModel.subtitles.first { $0.fromTo.contains(date) }
     }
 }
 
