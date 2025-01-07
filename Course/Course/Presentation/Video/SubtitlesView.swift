@@ -78,21 +78,8 @@ public struct SubtitlesView: View {
                                             .foregroundColor(subtitle.fromTo.contains(Date(milliseconds: currentTime))
                                                              ? Theme.Colors.accentButtonColor
                                                              : Theme.Colors.textPrimary)
-                                            
-                                            .onChange(of: currentTime, perform: { _ in
-                                                if subtitle.fromTo.contains(Date(milliseconds: currentTime)) {
-                                                    self.id = subtitle.id
-                                                }
-                                            })
                                         })
                                     }.id(subtitle.id)
-                                }
-                            }
-                            .onChange(of: id) { _ in
-                                withAnimation {
-                                    if !pause {
-                                        scroll.scrollTo(id, anchor: .top)
-                                    }
                                 }
                             }
                         }
@@ -103,6 +90,16 @@ public struct SubtitlesView: View {
                             autoScrollPublisher.send()
                         })
                     )
+                    .onChange(of: currentTime) { _ in
+                        refreshID()
+                    }
+                    .onChange(of: id) { newID in
+                        if !pause {
+                            withAnimation {
+                                scroll.scrollTo(newID, anchor: .top)
+                            }
+                        }
+                    }
                     .onReceive(autoScrollPublisher.debounce(for: .seconds(3), scheduler: DispatchQueue.main)) { _ in
                         if pause {
                             refreshID()
@@ -117,14 +114,9 @@ public struct SubtitlesView: View {
     }
     
     private func refreshID() {
-        if let subtitle = subtitle(at: currentTime) {
+        if let subtitle = viewModel.findSubtitle(at: Date(milliseconds: currentTime)) {
             id = subtitle.id
         }
-    }
-    
-    private func subtitle(at time: Double) -> Subtitle? {
-        let date = Date(milliseconds: time)
-        return viewModel.subtitles.first { $0.fromTo.contains(date) }
     }
 }
 
